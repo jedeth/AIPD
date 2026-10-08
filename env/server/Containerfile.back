@@ -1,0 +1,23 @@
+# pia-back (API Rails de l'outil PIA) - image de production
+# Ruby aligné sur pia-back/.ruby-version
+FROM docker.io/library/ruby:3.4.9-slim-bookworm
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends build-essential libpq-dev libyaml-dev git curl \
+ && rm -rf /var/lib/apt/lists/*
+
+ENV RAILS_ENV=production \
+    BUNDLE_DEPLOYMENT=1 \
+    BUNDLE_WITHOUT="development:test" \
+    RAILS_LOG_TO_STDOUT=1
+
+WORKDIR /rails
+COPY Gemfile Gemfile.lock .ruby-version ./
+RUN bundle install --jobs 8 && rm -rf ~/.bundle "${BUNDLE_PATH}"/ruby/*/cache
+
+COPY . .
+RUN rm -rf .git && bundle exec bootsnap precompile app/ lib/ || true
+
+EXPOSE 3000
+# db:prepare crée la base et charge le schéma au premier démarrage, puis applique les migrations
+CMD ["sh", "-c", "bin/rails db:prepare && exec bin/rails server -b 0.0.0.0 -p 3000"]

@@ -1,0 +1,21 @@
+# Environnement de dev isolé pour le logiciel PIA (CNIL)
+# Versions alignées sur pia/.tool-versions et pia/package.json (packageManager)
+FROM docker.io/library/node:22.20.0-bookworm-slim
+
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0 \
+    # Binaires inutiles pour le serveur de dev web (évite ~700 Mo de téléchargement)
+    CYPRESS_INSTALL_BINARY=0 \
+    ELECTRON_SKIP_BINARY_DOWNLOAD=1 \
+    NG_CLI_ANALYTICS=false \
+    # Ne pas installer les hooks git Husky dans pia/.git (ils casseraient les commits depuis l hôte)
+    HUSKY_SKIP_INSTALL=1
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends git ca-certificates python3 make g++ \
+ && rm -rf /var/lib/apt/lists/* \
+ && corepack enable \
+ && corepack prepare yarn@4.10.3 --activate
+
+WORKDIR /app
+EXPOSE 4200
+CMD ["yarn", "ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--poll", "1500"]

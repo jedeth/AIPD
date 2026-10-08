@@ -1,0 +1,257 @@
+﻿id;question_originale;en_clair;pourquoi;a_inclure;exemples;piege;valide;commentaire_dpo;points_a_verifier
+111;Quel est le traitement qui fait l'objet de l'étude ?;Vous devez indiquer quel traitement de données vous étudiez.;Cette question sert à décrire clairement le traitement afin que chacun comprenne son objet, sa finalité et son contexte.;"Le nom du traitement (ex. « Gestion des inscriptions au lycée »).
+Sa finalité principale (ex. « Permettre l’inscription des élèves et la constitution des dossiers scolaires »).
+Les enjeux attendus (ex. « Faciliter le suivi administratif, garantir la conformité aux exigences académiques »).
+Le contexte d’utilisation (ex. « Utilisé chaque année lors de la période d’inscription, par le service scolarité et les chefs d’établissement »).
+Le responsable du traitement et, le cas échéant, les sous‑traitants (ex. « Le rectorat est responsable, le logiciel X est sous‑traitant »).";"Traitement « Gestion des absences des élèves » : finalité de suivi de la présence, enjeux de sécurité des élèves, utilisé quotidiennement par les professeurs et le service de vie scolaire, responsable = établissement, sous‑traitant = éditeur du logiciel d’appel.
+Traitement « Dossier médical des élèves » : finalité de prise en charge sanitaire, enjeux de santé et de conformité, utilisé par l’infirmière scolaire et le service de santé académique, responsable = rectorat, sous‑traitant = prestataire de stockage sécurisé.
+Traitement « Gestion des candidatures aux bourses » : finalité d’attribution des aides financières, enjeux d’équité et de transparence, utilisé lors de la période de dépôt des dossiers, responsable = service des finances de l’académie, sous‑traitant = société de traitement des formulaires en ligne.";Ne décrivez pas les procédures détaillées (ex. comment remplir le formulaire) mais restez sur la description synthétique du traitement.;non;;
+112;Quelles sont les responsabilités liées au traitement ?;Indiquez qui décide du traitement, qui le réalise et comment les rôles sont partagés.;Cette information montre qui porte la responsabilité de la conformité et qui doit être consulté en cas de problème.;"Nom et fonction du responsable du traitement (ex. directeur d’établissement, service scolarité)
+Ses missions : définir les finalités, choisir les moyens, garantir la sécurité et le respect des règles
+Nom(s) et rôle(s) du ou des sous‑traitants (ex. prestataire d’hébergement, éditeur de logiciel) et le fait qu’ils n’agissent que sur instruction du responsable
+Éventuels co‑responsables et la répartition de leurs responsabilités (ex. DSI académique, service informatique de l’établissement)
+Référentiels ou certifications suivis (ex. code de conduite, label de sécurité) à mentionner";"Lycée : le directeur est responsable du traitement des données de suivi des absences ; la société qui héberge la plateforme d’absences est sous‑traitante et n’agit que sur les consignes du directeur ; le service informatique de l’académie est co‑responsable pour la sécurité du réseau.
+Collège : le service scolarité décide du traitement des notes des élèves ; l’éditeur du logiciel de gestion des notes est sous‑traitant ; la DSI de l’académie partage la responsabilité de la sauvegarde et de la récupération des données.
+Établissement professionnel : le responsable de la formation définit les finalités du suivi des stagiaires ; le prestataire qui fournit les tablettes est sous‑traitant ; le service juridique de l’académie co‑responsable du respect des mentions d’information.";Ne confondez pas le responsable du traitement avec l’utilisateur du logiciel : l’utilisateur n’est pas responsable de la conformité globale.;non;;
+113;Quels sont les référentiels applicables ?;Vous devez indiquer quels référentiels (codes de conduite, certifications, normes…) s’appliquent à votre traitement de données.;Cette question permet de montrer que vous vous basez sur des règles reconnues pour garantir la protection des données.;"Le code de conduite du ministère de l’Éducation nationale, s’il existe, ou tout autre code sectoriel approuvé
+Les certifications de sécurité ou de protection des données détenues par l’hébergeur ou le prestataire (ex. certification ISO, label de conformité)
+Les référentiels internes de votre académie ou de votre établissement (politique de sécurité, guide de bonnes pratiques)
+Les normes ou standards techniques que vous avez adoptés (ex. exigences du référentiel de sécurité du ministère)
+Tout autre cadre de référence externe qui a été choisi pour encadrer le traitement";"Un lycée utilise le code de conduite du ministère de l’Éducation nationale et la certification ISO 27001 de son prestataire cloud.
+Un service académique s’appuie sur le référentiel de sécurité de son académie et sur le label de conformité d’un logiciel de gestion des notes.
+Un collège a intégré le guide de bonnes pratiques de son rectorat et le certificat de conformité du fournisseur de messagerie.";Ne listez pas de référentiels qui ne concernent pas réellement votre traitement ou qui ne sont pas officiellement reconnus.;non;;"Vérifier qu'un code de conduite ministériel existe réellement ; sinon reformuler les exemples."
+121;Quelles sont les données traitées ?;Indiquez quelles informations personnelles vous collectez, qui peut les consulter et pendant combien de temps vous les conservez.;Cette description permet de savoir exactement ce qui est traité, qui y a accès et de vérifier que la durée de conservation est justifiée.;"Les catégories de données : nom, prénom, date de naissance, adresse, numéro INE, résultats scolaires, absences, informations de santé (si besoin).
+La durée de conservation prévue pour chaque catégorie (durée fixée par le référentiel applicable, à vérifier avec le DPO ou les archives).
+Les destinataires externes ou internes : équipe pédagogique, service administratif, rectorat, prestataire de la plateforme numérique, etc.
+Les personnes qui peuvent accéder aux données au sein de l’établissement : directeur, CPE, enseignant, personnel administratif, DPO.
+Les supports et le mode de traitement : dossiers papier, fichiers Excel, plateforme SIECLE, messagerie sécurisée, etc.";"Pour la gestion des absences, vous conservez le nom, le prénom, la classe, les dates d'absence et le motif pendant la durée fixée par le référentiel des archives, accessibles aux enseignants, au CPE et au service administratif via la plateforme SIECLE.
+Dans le cadre du suivi des résultats, vous traitez le numéro INE, les notes et les appréciations, conservés pendant la durée fixée par le référentiel, accessibles aux professeurs, au directeur et au service de la scolarité, stockés dans la base de données du logiciel de gestion scolaire.
+Les dossiers médicaux des élèves (allergies, traitements) sont conservés pendant la durée fixée par le référentiel, accessibles uniquement au CPE, à l’infirmier·e scolaire et au personnel autorisé, et sont archivés sur support papier sécurisé.";Ne pas oublier d’indiquer les personnes internes (ex. enseignants, CPE) comme destinataires ou d’omettre la durée de conservation pour chaque type de donnée.;non;;
+122;Comment le cycle de vie des données se déroule-t-il (description fonctionnelle) ?;Décrivez comment les données sont collectées, stockées, utilisées, archivées puis détruites dans votre service.;Cette description montre où les données circulent et quels points de contrôle sont nécessaires pour les protéger.;"Le point d’entrée : qui saisit les données (élèves, enseignants, logiciel de gestion, etc.)
+Le stockage : support utilisé (serveur interne, cloud, disque dur) et durée de conservation prévue
+Les traitements : quelles actions sont réalisées (calcul de moyennes, génération de bulletins, envoi de courriels)
+L’archivage : quand et comment les données sont déplacées vers un espace d’archivage
+La destruction : méthode prévue pour effacer définitivement les données lorsqu’elles ne sont plus utiles";"Un professeur saisit les notes dans le logiciel de suivi ; les données sont enregistrées sur le serveur de l’établissement, puis le système calcule les moyennes et génère les bulletins qui sont imprimés et envoyés aux familles.
+Le service administratif collecte les coordonnées des parents via le formulaire d’inscription en ligne, les stocke dans la base académique, les utilise pour envoyer les convocations, puis les archive chaque année scolaire dans un espace sécurisé.
+Le responsable de la cantine enregistre les menus et les allergies des élèves dans une application mobile, les données sont sauvegardées sur le cloud de l’académie, puis, à la fin de l’année, les dossiers sont supprimés après archivage des informations essentielles.";Ne vous contentez pas de dire « les données sont gérées », détaillez chaque étape du flux pour éviter les zones d’ombre.;non;;
+123;Quels sont les supports des données ?;Vous devez indiquer sur quels supports sont stockées ou transitent les données de votre traitement.;Cette information permet de savoir où les données sont réellement présentes et donc quels moyens de protection mettre en place.;"Les serveurs ou ordinateurs où les données sont enregistrées (ex. serveur de l’établissement, poste de travail du personnel)
+Les logiciels ou applications utilisées (ex. Système de gestion des notes, plateforme de messagerie)
+Les réseaux ou canaux de transmission (ex. réseau interne de l’établissement, connexion internet, VPN)
+Les supports papier (ex. dossiers d’élèves archivés, fiches d’inscription)
+Les personnes qui manipulent directement les données (ex. secrétaires, enseignants, agents administratifs)";"Les bulletins de notes sont enregistrés dans la base de données du serveur de la direction et imprimés sur papier pour les parents.
+Les dossiers médicaux des élèves sont conservés sur le serveur de la médecine scolaire et sur des dossiers papier dans le bureau du médecin scolaire.
+Les échanges d’informations entre le proviseur et les chefs d’établissement passent par la messagerie sécurisée de l’académie et, parfois, par des notes manuscrites déposées au secrétariat.";Ne mentionnez pas seulement le type de donnée (ex. « notes ») mais bien le support physique ou numérique où elle est conservée.;non;;
+211;Les finalités du traitement sont-elles déterminées, explicites et légitimes ?;Vous devez indiquer clairement pourquoi vous collectez les données, ce que vous en faites exactement, et que ces raisons sont légitimes.;Cette question montre que vous ne traitez les données que pour des objectifs précis, transparents et justifiés, afin de respecter les droits des personnes.;"Décrire la finalité précise (ex. : gérer les inscriptions, suivre les absences, organiser les examens).
+Préciser que la finalité est connue des personnes concernées (affichage, notice d'information, formulaire).
+Justifier la légitimité (ex. : obligation légale, mission de service public, intérêt légitime de l’établissement).
+Indiquer que les données ne seront pas réutilisées pour d’autres buts incompatibles.
+Mentionner les éventuelles finalités secondaires autorisées (ex. : archivage légal) et leur lien avec la finalité principale.";"Le service de scolarité collecte le nom, l’adresse et le niveau de classe des élèves uniquement pour établir les listes de classe et les bulletins scolaires.
+Le CPE utilise les données d’absences pour suivre la fréquentation et intervenir en cas de décrochage, sans les exploiter pour du marketing.
+Le service informatique conserve les logs d’accès aux plateformes pédagogiques pendant la durée fixée par le référentiel applicable (à vérifier avec le DPO ou les archives).";Ne pas mentionner de finalités vagues ou non justifiées, comme « améliorer les services » sans expliquer comment cela se traduit concrètement.;non;;
+212;Quel(s) est(sont) les fondement(s) qui rend(ent) votre traitement licite ?;Vous devez indiquer quel(s) motif(s) rend(ent) votre traitement de données légal.;Cette question montre que le traitement repose sur une base prévue par le droit, ce qui est indispensable pour le rendre licite.;"Le consentement des élèves, parents ou personnels (ex : autorisation de diffusion de photos).
+L’exécution d’un contrat ou d’une mission scolaire (ex : inscription, suivi pédagogique).
+Le respect d’une obligation légale ou réglementaire (ex : obligations de déclaration à l’inspection académique).
+La sauvegarde d’intérêts vitaux (ex : prise en charge médicale d’urgence).
+Un intérêt légitime clairement justifié (ex : sécurisation du réseau informatique de l’établissement).";"Le traitement des notes de chaque élève est justifié par l’exécution du contrat d’enseignement entre l’établissement et la famille.
+La collecte d’adresses e‑mail des parents repose sur leur consentement lorsqu’ils s’inscrivent à la plateforme de communication scolaire.
+Le suivi des absences est nécessaire pour répondre à l’obligation légale de déclaration des taux d’absentéisme à l’académie.";"Ne pas invoquer un « intérêt général » vague ; il faut préciser le fondement exact (consentement, contrat, obligation légale, etc.).";non;;
+213;Les données collectées sont-elles adéquates, pertinentes et limitées à ce qui est nécessaire au regard des finalités pour lesquelles elles sont traitées (minimisation des données) ?;Vous devez vérifier que chaque donnée que vous collectez est vraiment utile pour atteindre votre objectif.;Cette question montre que vous limitez la collecte aux seules informations indispensables, ce qui réduit les risques pour les personnes concernées.;"Lister chaque donnée collectée (ex. nom, date de naissance, adresse, résultats scolaires).
+Expliquer pourquoi chaque donnée est nécessaire pour la finalité (ex. le nom pour identifier l’élève, la date de naissance pour vérifier l’âge).
+Éliminer les données qui n’ont aucun lien avec la finalité (ex. numéro de sécurité sociale si non requis).
+Préciser les mesures de réduction de sensibilité (ex. pseudonymisation, suppression des champs inutiles).
+Indiquer comment vous contrôlez régulièrement la pertinence des données collectées.";"Pour la création d’un compte élève, vous ne conservez que le nom, le prénom, la date de naissance et l’adresse ; le numéro de téléphone n’est pas requis.
+Dans le suivi des absences, seules les dates d’absence et le motif sont collectés ; le lieu de résidence de l’élève n’est pas pertinent.
+Pour l’inscription à une activité sportive, vous demandez le certificat médical uniquement si l’activité le nécessite ; sinon vous ne le collectez pas.";Ne pas inclure de données « au cas où » ou « par précaution » sans justification précise.;non;;
+214;Les données sont-elles exactes et tenues à jour ?;Vous devez vérifier que les données que vous traitez sont correctes et que vous les mettez à jour quand c’est nécessaire.;Des données exactes permettent de respecter les droits des personnes et d’éviter des décisions basées sur des informations erronées.;"Procédure de vérification régulière (ex. chaque rentrée scolaire ou chaque semestre).
+Moyens pour corriger rapidement une donnée inexacte signalée par la personne concernée (formulaire de mise à jour, contact dédié).
+Responsable désigné pour contrôler la qualité des données (ex. le gestionnaire du dossier élève).
+Enregistrement des actions de mise à jour (qui a modifié quoi et quand).
+Plan de formation du personnel sur l’importance de l’exactitude des données.";"Le secrétariat vérifie chaque année les coordonnées des élèves et envoie un mail aux familles pour confirmer ou corriger les informations.
+Un enseignant signale qu’un élève a changé de nom après un changement de situation familiale ; le gestionnaire met à jour le dossier dans les 48 heures.
+Le service académique conserve un tableau de suivi des corrections apportées aux dossiers des personnels, avec la date et le nom du responsable de la mise à jour.";Ne pas attendre que la personne vous contacte : il faut prévoir des contrôles proactifs pour détecter les erreurs avant qu’elles ne posent problème.;non;;
+215;Quelle est la durée de conservation des données ?;Indiquez la durée pendant laquelle vous conservez chaque catégorie de donnée et expliquez pourquoi cette durée est nécessaire.;Cette question montre que vous ne gardez les données que le temps utile pour atteindre vos objectifs, ce qui respecte le principe de proportionnalité et permet aux personnes d’exercer leurs droits.;"Le type de donnée (ex. dossier scolaire, logs d’accès, formulaires de candidature).
+La durée de conservation prévue pour chaque type, en précisant si les données sont d’abord « courantes » puis archivées.
+La justification de cette durée : lien avec la finalité du traitement ou obligation légale spécifique.
+Le mode de passage en archivage (accès restreint) et le moment où la donnée sera définitivement supprimée.
+Le mécanisme technique ou organisationnel mis en place pour purger ou archiver les données à l’échéance.";"Les dossiers d’élèves sont conservés pendant la scolarité, puis archivés avec accès limité aux services administratifs jusqu’à la fin de la période de conservation fixée par le référentiel applicable.
+Les logs d’accès aux plateformes pédagogiques sont conservés pendant la période de suivi de l’incident, puis supprimés automatiquement par le système.
+Les formulaires de candidature sont gardés pendant le processus de recrutement, puis détruits dès que la décision finale est prise et que la durée de conservation prévue est atteinte.";"Ne pas indiquer une durée « indéfinie » ou sans justification ; chaque période doit être motivée par la finalité ou une obligation légale.";non;;
+221;Comment les personnes concernées sont-elles informées à propos du traitement ?;Vous devez expliquer comment vous informez les élèves, parents ou agents sur l’usage de leurs données.;Pour que chaque personne sache quelles données sont collectées, pourquoi et comment les utiliser, et qu’elle puisse exercer ses droits.;"Le contenu de l’information : quelles données sont collectées, à quelles fins, pendant combien de temps, quels droits les personnes ont (accès, rectification, effacement, opposition).
+Le support utilisé : notice sur le site de l’établissement, affichage dans les locaux, courrier ou mail, formulaire d’inscription, etc.
+Le moment où l’information est donnée : dès l’inscription, avant chaque nouvelle collecte, ou lors d’une mise à jour du traitement.
+La langue et la forme : texte clair, lisible, éventuellement version adaptée pour les personnes en situation de handicap.
+Le responsable à contacter : coordonnées du DPO ou du service chargé des données.";"Lors de l’inscription d’un élève, le formulaire comporte une page « Vos données personnelles » qui résume les finalités et indique le lien vers la notice de confidentialité.
+Un affichage dans le hall du lycée rappelle les finalités du suivi des absences et indique le contact du DPO pour toute question.
+Un mail envoyé aux parents chaque trimestre précise les données collectées pour le livret scolaire, la durée de conservation et les droits d’accès, de rectification ou d’effacement.";"Ne pas se contenter de dire que les données sont collectées ; il faut détailler les finalités et les droits des personnes concernées.";non;;
+222;Si applicable, comment le consentement des personnes concernées est-il obtenu ?;Vous devez expliquer comment vous recueillez le consentement des personnes concernées.;Cette question montre que le consentement est donné librement, de façon précise et éclairée, comme l’exige le RGPD.;"Le moment où le consentement est demandé (ex. : lors de l’inscription, avant l’envoi d’un questionnaire).
+Le support utilisé (case à cocher en ligne, formulaire papier, signature électronique, etc.).
+Les informations communiquées aux personnes (objet du traitement, durée de conservation, leurs droits).
+La façon dont le consentement est enregistré (date, version du texte, identité du responsable).
+Le moyen offert pour retirer le consentement à tout moment (lien de désinscription, formulaire de retrait).";"Lors de l’inscription d’un élève à la plateforme d’apprentissage, le parent coche une case « J’accepte que les données de mon enfant soient utilisées pour le suivi pédagogique ». Le formulaire indique la finalité, la durée de conservation et le lien pour se désinscrire.
+Avant de publier des photos d’une sortie scolaire sur le site de l’établissement, les parents reçoivent un mail avec un bouton « J’autorise la diffusion des images de mon enfant ». Le clic est enregistré avec la date et le nom du responsable de la communication.
+Un enseignant qui remplit son dossier RH en ligne doit cocher une case « J’accepte que mes coordonnées soient conservées pour la gestion du personnel ». Une notice précise les droits d’accès, de rectification et de suppression.";Ne pas se contenter d’une case à cocher sans fournir les informations claires sur le traitement et sans garder une trace du consentement.;non;;
+223;Comment les personnes concernées peuvent-elles exercer leurs droit d'accès et droit à la portabilité ?;Vous devez expliquer comment les personnes concernées peuvent demander à voir leurs données et à les récupérer dans un format portable.;Cette question montre que vous avez prévu les moyens pour que chacun puisse exercer ses droits d’accès et de portabilité.;"Le canal de demande (ex. formulaire en ligne, adresse mail du DPO, courrier recommandé).
+La procédure de vérification d’identité (ex. pièce d’identité, justificatif de lien parental).
+Le délai indiqué pour répondre à la demande (à vérifier avec le référentiel applicable).
+Le format dans lequel les données seront remises (ex. fichier CSV ou PDF, lisible par machine).
+Les modalités de transmission au tiers demandé (ex. envoi sécurisé par mail ou téléchargement via un espace protégé).";"Un élève envoie un mail au DPO avec le formulaire d’accès ; il reçoit ses notes et son emploi du temps au format CSV sous 10 jours.
+Un parent demande les dossiers médicaux de son enfant ; il fournit une copie de son livret de famille, puis reçoit les documents en PDF via un lien sécurisé.
+Un enseignant veut transférer ses coordonnées professionnelles à une nouvelle académie ; il remplit le formulaire de portabilité et reçoit un fichier XML qu’il transmet directement à son futur employeur.";"Ne pas oublier de préciser comment l’identité du demandeur est vérifiée ; sinon la demande peut être refusée.";non;;
+224;Comment les personnes concernées peuvent-elles exercer leurs droit de rectification et droit à l'effacement (droit à l'oubli) ?;Vous devez expliquer comment une personne peut demander la correction ou la suppression de ses données.;Cette question montre que vous avez prévu les moyens pour que les personnes puissent exercer leurs droits d’accès, de rectification et d’effacement.;"Le canal à utiliser (ex. adresse e‑mail dédiée, formulaire en ligne, courrier recommandé).
+Le délai indiqué pour traiter la demande (« dans les meilleurs délais »).
+Les étapes de vérification de l’identité de la personne avant de modifier ou supprimer les données.
+La façon dont vous informez la personne une fois la correction ou la suppression effectuée (mail de confirmation, courrier).
+Les cas où la demande ne peut pas être satisfaite immédiatement (ex. obligations légales de conservation) et la communication de la raison.";"Un élève envoie un e‑mail à l’adresse data.protection@ac‑example.fr pour signaler une erreur dans son adresse postale ; le service vérifie son identité, corrige l’adresse dans le système et renvoie un mail de confirmation.
+Un parent demande la suppression d’une photo de son enfant publiée sur le site de l’établissement ; il remplit le formulaire en ligne, le responsable des archives confirme la suppression et envoie un accusé de réception.
+Un enseignant constate une note erronée dans le dossier d’un élève ; il transmet la demande via le portail interne, le service administratif valide la demande, met à jour la note et informe l’enseignant et l’élève par mail.";Ne pas garder de trace écrite de la demande et de la réponse, ce qui rend difficile de prouver que vous avez respecté le délai.;non;;
+225;Comment les personnes concernées peuvent-elles exercer leurs droit de limitation et droit d'opposition ?;Vous devez expliquer comment une personne peut demander la limitation ou s’opposer au traitement de ses données.;Cette question montre que vous avez prévu un moyen simple pour que les personnes exercent leurs droits.;"Un point de contact unique (adresse e‑mail, formulaire en ligne ou adresse postale) indiqué clairement dans les mentions d’information.
+Une procédure décrite étape par étape : réception de la demande, vérification de l’identité, prise en compte de la demande, réponse écrite au demandeur.
+Le délai indicatif de traitement (à vérifier avec le DPO ou le référentiel applicable).
+Une mention que la limitation suspend le traitement sauf obligations légales, et que l’opposition met fin au traitement sauf motifs légitimes du responsable.
+La possibilité de contacter le DPO ou le service des archives pour toute question ou suivi.";"Un élève veut que son adresse e‑mail ne soit plus utilisée pour les newsletters : il envoie un mail à l’adresse du DPO, le service confirme la prise en compte et désactive l’envoi sous 10 jours.
+Un parent s’oppose à l’utilisation de la photo de son enfant sur le site de l’établissement : il remplit le formulaire « Opposition au traitement d’image » disponible sur l’intranet, le service communication bloque la diffusion et envoie une confirmation.
+Un enseignant demande la limitation du traitement de ses données de paie pendant un litige : il adresse une lettre recommandée au service RH, le service suspend le traitement et informe l’enseignant de la suspension.";Ne pas prévoir de réponse écrite ou de confirmation de prise en compte : la personne doit savoir que sa demande a bien été reçue et traitée.;non;;
+226;Les obligations des sous-traitants sont-elles clairement définies et contractualisées ?;Vous devez indiquer si les obligations de chaque sous‑traitant sont clairement définies et inscrites dans un contrat.;Cette question montre que vous avez formalisé les règles que les sous‑traitants doivent suivre pour protéger les données.;"Nom du sous‑traitant et son rôle (ex. hébergement du serveur, service de messagerie).
+Périmètre précis de ses missions (ex. stockage des dossiers élèves, envoi de newsletters).
+Référence au contrat ou à l’accord signé (date, numéro, lien vers le document).
+Mention des exigences obligatoires (durée du traitement, finalité, instructions écrites, obligation de notifier une fuite).
+Éventuelles certifications ou codes de conduite dont le sous‑traitant dispose (ex. ISO 27001).";"Le prestataire qui héberge le serveur de la plateforme d’apprentissage a un contrat qui précise qu’il ne peut utiliser les données que pour le stockage et la sauvegarde, pendant la durée du contrat, et qu’il doit signaler toute violation dans les 72 h.
+L’entreprise qui gère la messagerie scolaire a signé un accord indiquant qu’elle ne traite les adresses mail des élèves que sur instruction de l’établissement et qu’elle possède la certification ISO 27001.
+Le service d’impression externe a un contrat qui limite son accès aux seules fiches de paie du personnel, avec une clause de destruction des données à la fin du projet.";Ne vous contentez pas de dire « nous avons un contrat » sans préciser ce que le contrat couvre réellement.;non;;Vérifier la liste des mentions obligatoires du contrat de sous-traitance (art. 28 RGPD).
+227;En cas de transfert de données en dehors de l'Union européenne, les données sont-elles protégées de manière équivalente ?;Vous devez indiquer, pour chaque pays hors UE où les données sont stockées ou traitées, si le niveau de protection est équivalent et comment il est garanti.;Cette question montre que vous avez vérifié que les données restent protégées même lorsqu’elles quittent l’Union européenne.;"Nom du pays (ou du centre de données) où les données sont transférées
+Statut du pays : « pays adéquat », « hors UE sans décision d’adéquation » ou autre
+Le mécanisme utilisé : clauses contractuelles types, règles d’entreprise contraignantes, certification, etc.
+Une courte justification du choix de ce mécanisme (ex. : contrat signé avec le fournisseur, clause approuvée par la CNIL)
+Le responsable ou le service qui suit le suivi de ces transferts (ex. : DPO, service informatique)";"L’établissement utilise un serveur hébergé au Canada ; le Canada est reconnu comme pays adéquat, aucune clause supplémentaire n’est nécessaire.
+Le service académique stocke des sauvegardes aux États‑Unis ; il a signé des clauses contractuelles types avec le prestataire pour garantir la protection des données.
+Une plateforme d’apprentissage en ligne est hébergée en Inde ; le contrat inclut des clauses contractuelles types et le DPO a validé le dispositif.";Ne pas se contenter de dire « les données sont protégées » sans préciser le pays et le mécanisme juridique qui assure cette protection.;non;;
+321;Quels pourraient être les principaux impacts sur les personnes concernées si le risque se produisait ?;Quelles conséquences pourraient subir les personnes concernées si quelqu’un accédait illégalement à leurs données ?;Cette question vous aide à identifier les dommages possibles afin de mesurer la gravité du risque.;"atteinte à la vie privée
+discrimination ou stigmatisation
+préjudice moral ou psychologique
+perte de confiance envers l’établissement
+atteinte à la réputation ou à la carrière";"exposition de notes ou résultats scolaires
+diffusion de coordonnées personnelles
+accès aux dossiers médicaux ou de santé";"Ne pas se limiter à des impacts purement techniques ; pensez aux effets humains (sentiment, réputation, opportunités).";non;;
+322;Quelles sont les principales menaces qui pourraient permettre la réalisation du risque ?;Identifiez les menaces qui pourraient entraîner un accès illégitime à vos données.;Cette question vous aide à repérer les points faibles qui pourraient être exploités par un acteur malveillant ou par erreur.;"mot de passe faible ou réutilisé
+phishing (courriel ou SMS trompeur)
+logiciel malveillant (virus, ransomware)
+accès non autorisé interne (partage de compte, droits excessifs)
+perte ou vol de matériel (ordinateur, tablette, clé USB)
+vulnérabilité du réseau (Wi‑Fi non sécurisé, ports ouverts)
+erreur de configuration (serveur, application)
+partage de comptes ou d’identifiants";"Un enseignant utilise le même mot de passe pour le compte scolaire et son compte personnel.
+Un élève reçoit un mail de phishing qui l’incite à saisir ses identifiants de connexion à l’intranet.
+Un ordinateur portable du personnel est volé dans le vestiaire et contient des dossiers élèves.";"Ne confondez pas les conséquences (ex. perte de données) avec les menaces ; listez uniquement les actions ou vecteurs qui peuvent provoquer l’accès illégitime.";non;;
+323;Quelles sources de risques pourraient-elles en être à l'origine ?;Identifiez les sources qui peuvent provoquer un accès illégitime à vos données.;Pour connaître qui ou quoi peut compromettre la sécurité et ainsi préparer les mesures de protection adéquates.;"Employé interne
+Attaquant externe
+Fournisseur tiers
+Virus informatique
+Incendie";"Un professeur qui partage son mot de passe avec un élève.
+Un hacker qui exploite une faille du serveur de l’académie.
+Un prestataire de maintenance qui accède aux bases de données sans autorisation.";Ne négligez pas les sources non humaines (incendie, inondation, virus) qui peuvent aussi entraîner un accès illégitime.;non;;
+324;Quelles sont les mesures initiales , parmi celles identifiées, qui contribuent à traiter le risque ?;Vous devez choisir, parmi les mesures déjà prévues, celles qui permettent de réduire le risque d’accès non autorisé aux données.;Ces mesures montrent ce qui est déjà mis en place pour protéger les données avant d’ajouter d’éventuelles actions correctrices.;"contrôle d’accès (droits limités selon le rôle)
+authentification forte (mot de passe complexe, double facteur)
+journalisation des accès (traces enregistrées)
+mise à jour régulière des logiciels et des correctifs de sécurité
+formation du personnel à la sécurité des données";"Contrôle d’accès : seuls les professeurs ont le droit de consulter les bulletins des élèves.
+Authentification forte : les agents administratifs utilisent un code à usage unique pour se connecter à l’intranet scolaire.
+Journalisation : chaque connexion au serveur de notes est enregistrée avec l’identifiant de l’utilisateur.";"Ne cochez pas de mesures qui ne sont pas encore mises en œuvre ; seules les mesures déjà prévues comptent comme « mesures initiales ».";non;;
+325;Comment estimez-vous la gravité du risque , notamment en fonction des impacts potentiels et des mesures prévues ?;Vous devez indiquer, sur une échelle de quatre niveaux, à quel point un accès non autorisé à vos données serait grave, puis expliquer votre choix.;Cette question permet de mesurer l’ampleur des dommages possibles et d’ajuster les mesures de protection en fonction.;"Négligeable : l’accès ne cause que de petits désagréments (ex. : perte de temps, légère gêne de vie privée).
+Limitée : l’accès entraîne des désagréments significatifs mais surmontables (ex. : paiement erroné, diffusion d’une information confidentielle qui gêne).
+Importante : l’accès peut créer des difficultés réelles et durables (ex. : perte d’une opportunité d’étude, atteinte psychologique notable).
+Maximale : l’accès peut provoquer des conséquences graves voire irréversibles (ex. : perte financière majeure, atteinte permanente à la santé ou à la réputation).
+Justifiez votre niveau en décrivant les impacts possibles (corporels, matériels, moraux) et en rappelant les mesures déjà prévues (contrôle d’accès, chiffrement, journalisation).";"Accès à la liste des élèves avec leurs notes : impact limité – les élèves peuvent être gênés et subir une légère atteinte à leur vie privée.
+Accès aux dossiers médicaux d’un élève (allergies, traitements) : impact important – risque de mauvaise prise en charge ou de discrimination.
+Accès aux données bancaires du lycée (factures fournisseurs, subventions) : impact maximal – perte financière importante, impossibilité de payer les services essentiels.";"Ne vous contentez pas de dire « c’est très grave » ; détaillez toujours quels types d’impacts (matériels, moraux, corporels) justifient le niveau choisi.";non;;
+326;Comment estimez-vous la vraisemblance du risque , notamment au regard des menaces, des sources de risques et des mesures prévues ?;Vous devez indiquer à quel point le risque d’accès illégitime aux données peut se produire et expliquer votre choix.;Cela permet de montrer si les menaces identifiées sont réalistes au regard des faiblesses du support et des protections mises en place.;"Négligeable : aucune source de risque ne peut exploiter la faiblesse du support (ex. : documents papier enfermés dans une salle à accès badge + code).
+Limitée : il est difficile pour les sources de risque d’exploiter la faiblesse (ex. : papier dans un local à badge uniquement).
+Importante : la menace est possible parce que la faiblesse est accessible (ex. : papier dans les bureaux, accès contrôlé seulement par la personne d’accueil).
+Maximale : la menace est très facile à réaliser (ex. : papier laissé dans le hall public, accès libre à tous).
+Décrire le support concerné (papier, fichier numérique, etc.), la menace envisagée (vol, intrusion, perte), les sources de risque (personnes extérieures, salariés, visiteurs) et les mesures de protection déjà en place (badge, code, surveillance, chiffrement).";"Les bulletins de notes imprimés sont rangés dans un coffre fermé à clé et accessible uniquement au chef d’établissement → vraisemblance négligeable.
+Les dossiers élèves sur support papier sont stockés dans un local à badge sans code supplémentaire → vraisemblance limitée.
+Les tablettes utilisées par les professeurs sont laissées sur les bureaux du secrétariat, où seul le personnel d’accueil contrôle l’accès → vraisemblance importante.";Ne mélangez pas la gravité du dommage (conséquence) avec la vraisemblance du risque (probabilité que cela se produise).;non;;
+331;Quels pourraient être les principaux impacts sur les personnes concernées si le risque se produisait ?;Identifiez les conséquences que subirait une personne si ses données étaient modifiées sans son accord.;Cela permet d’évaluer le préjudice potentiel pour les élèves, enseignants ou parents et de mesurer la gravité du risque.;"Atteinte à la vie privée
+Erreur d’évaluation ou de résultat scolaire
+Décision administrative ou disciplinaire erronée
+Perte de confiance dans l’établissement
+Risque de discrimination ou de stigmatisation";"Note modifiée
+Adresse erronée
+Données de santé altérées";Ne mélangez pas les impacts sur le service (ex. perte de données) avec les impacts directs sur la personne concernée.;non;;
+332;Quelles sont les principales menaces qui pourraient permettre la réalisation du risque ?;Identifiez les menaces qui pourraient provoquer une modification non désirée de vos données.;Cette question sert à repérer les sources possibles d’erreur ou d’attaque afin de les anticiper.;"Erreur humaine (saisie ou suppression accidentelle)
+Logiciel défectueux ou mise à jour qui corrompt les fichiers
+Accès non autorisé (compte piraté, intrusion)
+Malware (virus, ransomware) qui altère les données
+Mauvaise configuration des droits d’accès";"Un enseignant qui supprime par erreur les notes d’une classe
+Un technicien qui applique une mise à jour du serveur et corrompt la base des absences
+Un élève qui utilise un compte administrateur et modifie les emplois du temps";"Ne pas confondre une perte de données avec une modification ; ne listez que les menaces, pas les conséquences.";non;;
+333;Quelles sources de risques pourraient-elles en être à l'origine ?;Identifiez les personnes ou les événements qui peuvent provoquer une modification non désirée des données.;Cette question sert à repérer qui ou quoi peut altérer les données, afin de mettre en place des mesures de prévention adaptées.;"Employé interne
+Utilisateur négligeant
+Attaquant externe
+Fournisseur ou prestataire externe
+Incident matériel (incendie, inondation, coupure de courant)";"Un professeur qui, par erreur, change la note d’un élève dans le logiciel de suivi.
+Un technicien informatique qui, en intervenant sur le serveur, supprime ou modifie des dossiers.
+Un hacker qui exploite une faille du réseau de l’établissement pour altérer des fichiers.";Ne mélangez pas la source du risque (qui ou quoi) avec la conséquence (les dommages qui en résultent).;non;;
+334;Quelles sont les mesures , parmi celles identifiées, qui contribuent à traiter le risque ?;Vous devez choisir les mesures déjà prévues qui permettent d’éviter ou de corriger une modification non désirée des données.;Cette question sert à identifier les protections déjà en place pour limiter le risque de falsification ou d’altération accidentelle ou malveillante.;"Contrôle d’accès (droits limités aux besoins)
+Journalisation / traçabilité des modifications
+Sauvegarde régulière et restauration
+Validation et contrôle des saisies
+Formation du personnel à la manipulation des données";"Contrôle d’accès
+Journalisation des modifications
+Sauvegarde quotidienne";Ne cochez pas de mesures qui ne sont pas réellement appliquées dans votre établissement.;non;;
+335;Comment estimez-vous la gravité du risque , notamment en fonction des impacts potentiels et des mesures prévues ?;Vous devez indiquer à quel point la modification non désirée d’une donnée serait grave, puis expliquer votre choix.;Cette question sert à mesurer l’ampleur du préjudice possible pour les personnes concernées et à vérifier que les mesures de protection sont suffisantes.;"Négligeable : la modification n’entraîne que de petits désagréments (ex. perte de temps, légère contrariété).
+Limitée : la modification cause des désagréments importants mais surmontables (ex. paiement erroné, refus d’accès à un service).
+Importante : la modification crée des conséquences significatives qui demandent un réel effort pour être résolues (ex. perte d’une opportunité d’inscription, détournement d’argent non remboursé).
+Maximale : la modification engendre des dommages graves ou irréversibles (ex. perte de dossier médical essentiel, atteinte permanente à la vie privée).
+Pour chaque niveau, préciser le type d’impact attendu (corporel, matériel, moral) et rappeler les mesures prévues (contrôles d’accès, sauvegardes, journalisation) qui limitent la gravité.";"Modification d’une note d’élève : si la note est légèrement erronée, l’impact est négligeable ; si la note est totalement fausse et empêche l’élève de passer en classe, l’impact est important.
+Changement d’une adresse de famille dans le système de la cantine : une simple erreur de saisie entraîne un retard de facturation (impact limité) ; une adresse erronée qui conduit à la perte du versement de la cantine pendant plusieurs mois peut être considéré comme important.
+Altération d’un dossier de santé d’un élève (ex. allergie non renseignée) : si l’erreur n’est découverte qu’une fois, l’impact est limité ; si elle conduit à une prise en charge médicale inadaptée, l’impact devient maximal.";"Ne vous basez pas uniquement sur la probabilité d’une modification ; la gravité se juge avant tout par la gravité des conséquences pour les personnes concernées.";non;;
+336;Comment estimez-vous la vraisemblance du risque , notamment au regard des menaces, des sources de risques et des mesures prévues ?;Vous devez indiquer à quel point le risque de modification non désirée de données peut se produire et expliquer votre choix.;Cette question montre si les menaces, les sources de risque et les protections rendent le risque probable ou non.;"Décrire le support concerné (papier, fichier numérique, localisation).
+Identifier les sources de risque (personnel interne, visiteurs, cyber‑criminels, etc.).
+Préciser la menace (vol, intrusion, erreur de manipulation, piratage).
+Lister les mesures de protection déjà en place (contrôle d’accès, mot de passe, chiffrement, sauvegarde).
+Justifier le niveau choisi en le comparant aux définitions : négligeable, limitée, importante, maximale.";"Dans un lycée, les dossiers élèves sont stockés sur un serveur protégé par mot de passe et firewall ; le risque est estimé « limité » parce que les cyber‑criminels ont peu d’accès direct.
+Dans un collège, les bulletins sont imprimés et rangés dans le bureau du directeur, accessible uniquement à l’équipe pédagogique ; le risque est jugé « négligeable » car aucune personne extérieure ne peut entrer.
+Dans un établissement, les fichiers de notes sont partagés sur un disque partagé accessible à tous les enseignants sans authentification ; le risque est considéré « important » car un collègue pourrait modifier les données très facilement.";"Ne choisissez pas le niveau uniquement parce que le risque vous paraît grave ; il faut le lier aux protections réellement en place.";non;;
+341;Quels pourraient être les principaux impacts sur les personnes concernées si le risque se produisait ?;Indiquez quels effets la perte de données pourrait avoir sur les personnes concernées.;Cette question permet de mesurer les conséquences concrètes pour les élèves, parents ou personnels si les données disparaissent.;"impossibilité d’accéder à un service ou à une prestation
+atteinte à la vie privée (ex. divulgation involontaire d’informations sensibles)
+préjudice financier ou administratif (ex. frais supplémentaires, retard de paiement)
+discrimination ou exclusion (ex. refus d’inscription, perte de droits)
+perte de confiance dans l’établissement";"impossibilité d’inscription
+retard de délivrance du diplôme
+perte de justificatifs de paiement";"Ne remplissez pas cette case avec des phrases longues ; utilisez uniquement des mots‑clés ou de très courtes expressions.";non;;
+342;Quelles sont les principales menaces qui pourraient permettre la réalisation du risque ?;Identifiez les menaces qui peuvent provoquer la perte de données dans votre établissement.;Cette question vous aide à repérer les situations qui, si elles se produisent, peuvent entraîner la disparition de vos fichiers.;"Panne matérielle (ex. disque dur, serveur)
+Erreur humaine (ex. suppression accidentelle, mauvaise manipulation)
+Cyber‑attaque (ex. ransomware, virus)
+Sinistre physique (ex. incendie, inondation, vol de supports)
+Défaillance logicielle ou de mise à jour";"Disque dur du serveur qui tombe en panne et rend les dossiers indisponibles
+Un enseignant qui supprime par erreur un répertoire partagé contenant les copies d’élèves
+Un ransomware qui chiffre les fichiers du lycée et bloque l’accès aux données";"Ne listez pas des notions trop générales comme « mauvaise organisation » ; restez sur des menaces concrètes et identifiables.";non;;
+343;Quelles sources de risques pourraient-elles en être à l'origine ?;Vous devez indiquer quelles sources de risques peuvent provoquer la disparition de données.;Identifier la provenance du risque permet de mettre en place les mesures de prévention adaptées.;"Source humaine interne (ex : employé, administrateur, utilisateur)
+Source humaine externe (ex : attaquant, tiers malintentionné, prestataire)
+Source non humaine (ex : incident matériel, sinistre, virus informatique)
+Erreur ou négligence (ex : suppression accidentelle, mauvaise manipulation)
+Acte malveillant (ex : sabotage, vol de données)";"Un professeur qui supprime par erreur la base de notes d’une classe.
+Un technicien informatique qui, en intervenant, cause une perte de sauvegarde.
+Un hacker qui exploite une faille du serveur de l’établissement.";"Ne pas confondre la cause (source de risque) avec la conséquence (perte de données) ; la réponse doit rester une liste d’étiquettes, pas une phrase.";non;;
+344;Quelles sont les mesures , parmi celles identifiées, qui contribuent à traiter le risque ?;Indiquez les mesures que vous avez déjà mises en place ou que vous prévoyez, et qui permettent de limiter le risque de perte de données.;Cette question sert à montrer comment vous protégez les données contre les pannes, les erreurs ou les suppressions accidentelles.;"Sauvegarde automatisée
+Redondance des serveurs
+Plan de reprise d’activité (PRA)
+Contrôle d’accès aux systèmes
+Mise à jour régulière des logiciels";"Sauvegarde quotidienne
+Serveur en double (cluster)
+Test du plan de reprise chaque semestre";"Ne pas cocher uniquement des mesures théoriques ; il faut choisir celles qui existent réellement ou qui sont réellement prévues.";non;;
+345;Comment estimez-vous la gravité du risque , notamment en fonction des impacts potentiels et des mesures prévues ?;Vous devez indiquer à quel point la perte de données serait grave, puis expliquer pourquoi vous avez choisi ce niveau.;Cette question permet de mesurer l’impact potentiel sur les personnes concernées et de vérifier que les mesures de prévention sont suffisantes.;"Niveau négligeable : perte sans réel préjudice (ex. perte d’une fiche de présence, désagrément mineur).
+Niveau limité : désagrément important mais surmontable (ex. perte d’un relevé de notes entraînant un retard administratif).
+Niveau important : conséquences significatives qui demandent un effort réel pour être résolues (ex. perte de dossiers de candidature à un stage, risque de perte d’opportunité).
+Niveau maximal : préjudice grave ou irréversible (ex. perte du dossier médical d’un élève, impossibilité de prouver un droit).
+Justification : décrivez les impacts concrets (corporels, matériels, moraux) et les mesures déjà en place (sauvegarde, redondance, procédures de récupération).";"Une perte de la liste des absences d’une classe (niveau négligeable) : les professeurs reconstitueront les données à partir de leurs notes.
+La disparition du fichier de suivi des bourses d’études (niveau important) : certains élèves pourraient perdre une aide financière et devoir refaire la demande.
+La perte du dossier d’inscription médicale d’un élève (niveau maximal) : le médecin ne pourra pas assurer le suivi et l’élève risque une prise en charge inadaptée.";"Ne sous‑évaluez pas la gravité en vous limitant à la perte de données « technique » ; pensez toujours aux conséquences réelles pour les personnes concernées.";non;;
+346;Comment estimez-vous la vraisemblance du risque , notamment au regard des menaces, des sources de risques et des mesures prévues ?;Vous devez indiquer à quel point le risque de disparition de données peut se produire, puis expliquer votre choix.;Cette estimation montre si les menaces identifiées sont réalistes compte tenu des faiblesses de vos supports et des protections en place.;"Négligeable : les sources de risque ne peuvent pas exploiter la faiblesse du support (ex. : documents papier enfermés dans une salle à accès badge + code).
+Limitée : difficile pour les sources de risque d’agir, mais pas impossible (ex. : documents papier dans une salle à accès badge uniquement).
+Importante : possible que les sources de risque réussissent (ex. : dossiers papier dans les bureaux, l’accès est contrôlé par une personne à l’accueil).
+Maximale : très facile pour les sources de risque d’agir (ex. : dossiers papier laissés dans le hall d’accueil ouvert à tous).
+Justifiez votre niveau en décrivant les menaces, les vulnérabilités du support et les mesures de protection existantes.";"Dans un lycée, les bulletins scolaires sont conservés dans un coffre fermé à clé : vraisemblance négligeable.
+Dans un collège, les dossiers d’élèves sont rangés dans un classeur dans le bureau du proviseur, accessible uniquement sur présentation d’un badge : vraisemblance limitée.
+Dans un lycée professionnel, les dossiers de stage sont sur une étagère du bureau du responsable, l’accès se fait via la réception : vraisemblance importante.
+Dans une école primaire, les listes de présence sont affichées sur un tableau dans le hall d’entrée, accessible à tous les visiteurs : vraisemblance maximale.";"Ne choisissez pas le niveau le plus élevé par défaut ; il faut le justifier en fonction des protections réellement en place.";non;;

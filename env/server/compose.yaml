@@ -1,0 +1,54 @@
+name: pia-server
+
+services:
+  db:
+    image: docker.io/library/postgres:16-alpine
+    container_name: pia-db
+    environment:
+      POSTGRES_USER: pia
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: pia_production
+    volumes:
+      - pia_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pia -d pia_production"]
+      interval: 10s
+      retries: 5
+    restart: unless-stopped
+
+  back:
+    build:
+      context: ../../pia-back
+      dockerfile: ../env/server/Containerfile.back
+    image: localhost/pia-back:latest
+    container_name: pia-back
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://pia:${POSTGRES_PASSWORD}@db:5432/pia_production
+    volumes:
+      - ./zz_container_overrides.rb:/rails/config/initializers/zz_container_overrides.rb:ro
+      - pia_storage:/rails/storage
+      - pia_mails:/rails/tmp/mails
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  front:
+    image: docker.io/library/nginx:1.28-alpine
+    container_name: pia-front
+    volumes:
+      - ../../pia/dist/pia-angular/browser:/usr/share/nginx/html:ro
+      - ./nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
+    environment:
+      NGINX_ENTRYPOINT_LOCAL_RESOLVERS: "1"
+    ports:
+      # localhost uniquement pour l'instant : accès via tunnel SSH
+      - "127.0.0.1:8080:80"
+    depends_on:
+      - back
+    restart: unless-stopped
+
+volumes:
+  pia_pgdata:
+  pia_storage:
+  pia_mails:

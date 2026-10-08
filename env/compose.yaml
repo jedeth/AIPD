@@ -1,0 +1,27 @@
+name: pia-dev
+
+services:
+  pia:
+    build:
+      context: .
+      dockerfile: Containerfile
+    image: localhost/pia-dev:node22
+    container_name: pia-dev
+    working_dir: /app
+    volumes:
+      - ../pia:/app
+      # node_modules et cache Angular dans des volumes nommés : rien n'est installé sur l'hôte
+      - pia_node_modules:/app/node_modules
+      - pia_angular_cache:/app/.angular
+    ports:
+      # Lié à localhost uniquement : accès depuis le poste Windows via tunnel SSH
+      - "127.0.0.1:4200:4200"
+    environment:
+      HUSKY_SKIP_INSTALL: "1"
+    # --poll : la limite inotify (max_user_instances=128) est partagée avec tout le compte iarag
+    command: sh -c "yarn install --immutable && yarn ng serve --host 0.0.0.0 --port 4200 --poll 1500"
+    restart: unless-stopped
+
+volumes:
+  pia_node_modules:
+  pia_angular_cache:
