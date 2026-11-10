@@ -1,6 +1,6 @@
 # Carnet de bord — PIA académie + assistant IA
 
-> Dernière mise à jour : **2026-11-10** (création du carnet, reprise après un mois).
+> Dernière mise à jour : **2026-11-10** (pause en fin de session).
 > Tenu à jour par la skill `aipd-reprise` à chaque pause et à chaque reprise.
 > **Aucun secret ici** : ce fichier est versionné (dépôt `jedeth/AIPD`). Les secrets sont dans `env/server/.env` et `env/server/admin.secret` (droits 600).
 
@@ -17,14 +17,15 @@
 | Front de dev (ng serve) | http://localhost:4200 — mode local par défaut, à basculer en mode serveur comme ci-dessus |
 | PIA de démonstration | n° 8 « Cantine - badges élèves (essai prefill) » (contient des incohérences volontaires) |
 
-## 2. État actuel (constaté le 2026-11-10)
+## 2. État actuel (constaté le 2026-11-10, à la pause)
 
 - Conteneurs : `pia-front` (nginx, 8080), `pia-back` (Rails), `pia-db` (Postgres 16, base `pia_production`) et `pia-dev` (ng serve, 4200) sont tous **Up**. Le front répond 200, `/api/assistant/status` répond 401 sans jeton, ce qui est attendu.
 - Branche déployée : **`feature/prefill`** sur les deux dépôts (front `dist` et image back).
   - pia : `815ca92d` (cohérence), `01e2f337` (réponses contingentées), `c8ae8fe1`, `adb4bc5c`
   - pia-back : `aaa4cd9` (cohérence), `566bf3c` (contingentées), `f9e09b3` (assistant)
 - LLM : Albert API, modèle par défaut `gpt-oss-120b`, sélecteur de modèle actif (`ASSISTANT_MODEL_CHOICE=true`). Le quota (10 requêtes/min, 1 000/jour) est **partagé** entre tous les utilisateurs.
-- 19 appels assistant tracés, le dernier le 2026-10-08. Aucune erreur 5xx sur les dernières 72 h.
+- 19 appels assistant tracés, le dernier le 2026-10-08. Aucune erreur 5xx sur les dernières 24 h.
+- Code : rien de non commité dans `pia` ni `pia-back`. Dans `~/AIPD`, les pointeurs `pia` et `pia-back` (sous-dépôts) ne sont pas mis à jour vers `feature/prefill`, volontairement pour l'instant.
 
 ## 3. Fonctions de l'assistant
 
@@ -78,3 +79,4 @@ Les détails d'exploitation (sauvegardes, mails, passage en production) sont dan
 
 - **2026-10-08 → 10-09** : conteneurisation (dev, serveur, Electron Windows) ; assistant Albert (M'aider, sélecteur de modèle) ; questions simplifiées statiques ; matrice de dépendances pour le DPO ; réponses contingentées et cohérence sur `feature/prefill`.
 - **2026-11-10** : reprise après un mois. Tous les services tournent. Création de ce carnet et de la skill `aipd-reprise`. Matrice de dépendances reconstruite depuis `dependencies.yml`.
+- **2026-11-10 (pause)** : matrice de dépendances reconstruite ; document « Questions élémentaires PIA — sections 1 et 2 » rédigé pour le DPO (29 questions, arbre de décision de la base légale). Aucun code modifié. Reprise : relecture DPO des deux documents.
