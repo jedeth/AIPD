@@ -26,8 +26,9 @@
   - pia-back : `aaa4cd9` (cohérence), `566bf3c` (contingentées), `f9e09b3` (assistant)
 - LLM : Albert API, modèle par défaut `gpt-oss-120b`, sélecteur de modèle actif (`ASSISTANT_MODEL_CHOICE=true`). Le quota (10 requêtes/min, 1 000/jour) est **partagé** entre tous les utilisateurs.
 - 19 appels assistant tracés, le dernier le 2026-10-08. Aucune erreur 5xx sur les dernières 24 h.
-- MonServiceSécurisé (ANSSI) : installé le 2026-11-10, conteneurs `mss-web` (127.0.0.1:8090) et `mss-db`, projet `mss` (`env/mss/`). Sources `~/AIPD/mon-service-securise` (ignoré par git), branche `local/connexion-dev` = master ANSSI + connexion locale sans ProConnect (correctif **non commité**). Ne jamais exposer au-delà de 127.0.0.1.
-- Code : rien de non commité dans `pia` ni `pia-back`. Dans `~/AIPD`, les pointeurs `pia` et `pia-back` (sous-dépôts) ne sont pas mis à jour vers `feature/prefill`, volontairement pour l'instant.
+- MonServiceSécurisé (ANSSI) : installé le 2026-11-10, conteneurs `mss-web` (127.0.0.1:8090) et `mss-db`, projet `mss` (`env/mss/`). Sources `~/AIPD/mon-service-securise` (ignoré par git), branche `local/connexion-dev` = master ANSSI + connexion locale sans ProConnect (correctif commité localement : `8cfc3c8ab`, pas de dépôt distant). Ne jamais exposer au-delà de 127.0.0.1.
+- MSS au 2026-11-10 : conteneurs Up, page d'accueil 200, aucun compte ni service encore créé, aucune erreur.
+- Code : rien de non commité dans `pia`, `pia-back` ni `mon-service-securise`. Dans `~/AIPD`, les pointeurs `pia` et `pia-back` (sous-dépôts) ne sont pas mis à jour vers `feature/prefill`, volontairement pour l'instant.
 
 ## 3. Fonctions de l'assistant
 
@@ -85,3 +86,4 @@ Les détails d'exploitation (sauvegardes, mails, passage en production) sont dan
 - **2026-11-10 (pause)** : matrice de dépendances reconstruite ; document « Questions élémentaires PIA — sections 1 et 2 » rédigé pour le DPO (29 questions, arbre de décision de la base légale). Aucun code modifié. Reprise : relecture DPO des deux documents.
 - **2026-11-10** : clone de MonServiceSécurisé (Apache-2.0, Node/Express + Svelte + Postgres 14) pour le futur projet combiné PIA + analyse de risques.
 - **2026-11-10** : installation locale de MonServiceSécurisé (Podman, Postgres 14, chiffrement ChaCha20 actif, e-mails dans les logs) ; connexion ProConnect contournée par un formulaire local (choix utilisateur).
+- **2026-11-10 (pause)** : MonServiceSécurisé installé et vérifié dans le navigateur ; note de cadrage du combo PIA + MSS rédigée pour le DPO. Reprise : retours du DPO sur les 3 documents (matrice, questions élémentaires, note de cadrage).
