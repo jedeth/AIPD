@@ -45,7 +45,8 @@
 1. **Récupérer les décisions du DPO** de la réunion du 2026-10-13. La « Matrice de dépendances PIA » a été reconstruite le 2026-11-10 (Claude Docs, https://claude.ai/artifact/WpZsq1ePB3ioEFDLhi4PDh) : décisions DPO à ressaisir dedans.
 2. Reporter ces décisions dans `dependencies.yml` (`validated`, `rules_validated`). Importer le CSV relu des questions simplifiées : `python3 env/tools/simplified_questions_review.py import`.
 3. Faire relire au DPO « Questions élémentaires PIA — sections 1 et 2 » (https://claude.ai/artifact/CX67rPkbtZPYK4aS78kHX2) : 29 questions qui alimentent les 18 questions CNIL des sections 1-2 (futur « parcours guidé »). La section 3 sera traitée plus tard avec MonServiceSécurisé (ANSSI).
-4. Décider de la suite :
+4. Faire valider au DPO la note de cadrage « Combo PIA + MonServiceSécurisé » (https://claude.ai/artifact/UgPdhSWYGDkz2eVtSDr8Dy) : option 2 recommandée (socle commun + passerelles : import Excel vers MSS, API publique MSS en lecture pour mesures/risques).
+5. Décider de la suite :
    - fusionner `feature/prefill` dans `feature/assistant` ;
    - attaquer les fonctions V1 restantes ;
    - corriger la faille amont `PiaPolicy#show?` (`is_example`), sur une branche séparée.
