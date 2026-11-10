@@ -39,7 +39,7 @@
 
 ## 4. Prochaine étape
 
-1. **Récupérer les décisions du DPO** de la réunion du 2026-10-13. Le document Claude Docs « Matrice de dépendances PIA » n'est plus accessible (supprimé ou plus partagé). Il peut être reconstruit depuis `dependencies.yml` si besoin.
+1. **Récupérer les décisions du DPO** de la réunion du 2026-10-13. La « Matrice de dépendances PIA » a été reconstruite le 2026-11-10 (Claude Docs, https://claude.ai/artifact/WpZsq1ePB3ioEFDLhi4PDh) : décisions DPO à ressaisir dedans.
 2. Reporter ces décisions dans `dependencies.yml` (`validated`, `rules_validated`). Importer le CSV relu des questions simplifiées : `python3 env/tools/simplified_questions_review.py import`.
 3. Décider de la suite :
    - fusionner `feature/prefill` dans `feature/assistant` ;
@@ -76,4 +76,4 @@ Les détails d'exploitation (sauvegardes, mails, passage en production) sont dan
 ## 7. Journal
 
 - **2026-10-08 → 10-09** : conteneurisation (dev, serveur, Electron Windows) ; assistant Albert (M'aider, sélecteur de modèle) ; questions simplifiées statiques ; matrice de dépendances pour le DPO ; réponses contingentées et cohérence sur `feature/prefill`.
-- **2026-11-10** : reprise après un mois. Tous les services tournent. Création de ce carnet et de la skill `aipd-reprise`.
+- **2026-11-10** : reprise après un mois. Tous les services tournent. Création de ce carnet et de la skill `aipd-reprise`. Matrice de dépendances reconstruite depuis `dependencies.yml`.
