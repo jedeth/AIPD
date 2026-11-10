@@ -14,6 +14,7 @@
 | Application (mode serveur) | http://localhost:8080 — après un déploiement, **Ctrl+Maj+R** (service worker) |
 | Paramètres du front | Menu Paramètres → URL `http://localhost:8080/api`, Client ID / Client Secret : voir `env/server/admin.secret` |
 | Compte admin | email `admin@pia.local`, mot de passe dans `env/server/admin.secret` |
+| MonServiceSécurisé (local) | http://localhost:8090 (tunnel `-L 8090:127.0.0.1:8090`), « Se connecter » → formulaire local (e-mail, sans mot de passe). Doc : `env/mss/README.md` |
 | Front de dev (ng serve) | http://localhost:4200 — mode local par défaut, à basculer en mode serveur comme ci-dessus |
 | PIA de démonstration | n° 8 « Cantine - badges élèves (essai prefill) » (contient des incohérences volontaires) |
 
@@ -25,7 +26,7 @@
   - pia-back : `aaa4cd9` (cohérence), `566bf3c` (contingentées), `f9e09b3` (assistant)
 - LLM : Albert API, modèle par défaut `gpt-oss-120b`, sélecteur de modèle actif (`ASSISTANT_MODEL_CHOICE=true`). Le quota (10 requêtes/min, 1 000/jour) est **partagé** entre tous les utilisateurs.
 - 19 appels assistant tracés, le dernier le 2026-10-08. Aucune erreur 5xx sur les dernières 24 h.
-- MonServiceSécurisé (ANSSI) : clone de référence dans `~/AIPD/mon-service-securise` (master `ad81030e6`, 2026-11-10), ignoré par git, **jamais lancé**. Ne pas utiliser leur `docker-compose.yml` tel quel (Postgres ouvert sans mot de passe sur 5432) : écrire un compose Podman dans `env/` le moment venu. Mise à jour : `git -C ~/AIPD/mon-service-securise pull`.
+- MonServiceSécurisé (ANSSI) : installé le 2026-11-10, conteneurs `mss-web` (127.0.0.1:8090) et `mss-db`, projet `mss` (`env/mss/`). Sources `~/AIPD/mon-service-securise` (ignoré par git), branche `local/connexion-dev` = master ANSSI + connexion locale sans ProConnect (correctif **non commité**). Ne jamais exposer au-delà de 127.0.0.1.
 - Code : rien de non commité dans `pia` ni `pia-back`. Dans `~/AIPD`, les pointeurs `pia` et `pia-back` (sous-dépôts) ne sont pas mis à jour vers `feature/prefill`, volontairement pour l'instant.
 
 ## 3. Fonctions de l'assistant
@@ -82,3 +83,4 @@ Les détails d'exploitation (sauvegardes, mails, passage en production) sont dan
 - **2026-11-10** : reprise après un mois. Tous les services tournent. Création de ce carnet et de la skill `aipd-reprise`. Matrice de dépendances reconstruite depuis `dependencies.yml`.
 - **2026-11-10 (pause)** : matrice de dépendances reconstruite ; document « Questions élémentaires PIA — sections 1 et 2 » rédigé pour le DPO (29 questions, arbre de décision de la base légale). Aucun code modifié. Reprise : relecture DPO des deux documents.
 - **2026-11-10** : clone de MonServiceSécurisé (Apache-2.0, Node/Express + Svelte + Postgres 14) pour le futur projet combiné PIA + analyse de risques.
+- **2026-11-10** : installation locale de MonServiceSécurisé (Podman, Postgres 14, chiffrement ChaCha20 actif, e-mails dans les logs) ; connexion ProConnect contournée par un formulaire local (choix utilisateur).

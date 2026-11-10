@@ -1,0 +1,40 @@
+# MonServiceSécurisé (ANSSI) — instance locale de développement, projet « mss ».
+# Lancement : cd ~/AIPD/env/mss && podman-compose up -d --build
+# Accès : tunnel SSH -L 8090:127.0.0.1:8090 puis http://localhost:8090
+name: mss
+
+services:
+  mss-db:
+    image: docker.io/library/postgres:14-alpine
+    container_name: mss-db
+    environment:
+      POSTGRES_USER: mss
+      POSTGRES_PASSWORD: ${MSS_DB_PASSWORD}
+      POSTGRES_DB: mss
+    volumes:
+      - mss_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mss -d mss"]
+      interval: 5s
+      retries: 20
+    restart: unless-stopped
+
+  mss-web:
+    build:
+      context: ../../mon-service-securise
+      dockerfile: ../env/mss/Containerfile
+    image: localhost/mss-web:latest
+    container_name: mss-web
+    env_file: .env
+    environment:
+      NODE_ENV: development
+      PORT: "3000"
+      URL_SERVEUR_BASE_DONNEES: postgres://mss:${MSS_DB_PASSWORD}@mss-db:5432/mss
+    depends_on:
+      - mss-db
+    ports:
+      - "127.0.0.1:8090:3000"
+    restart: unless-stopped
+
+volumes:
+  mss_pgdata:
