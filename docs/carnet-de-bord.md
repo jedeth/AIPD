@@ -25,6 +25,7 @@
   - pia-back : `aaa4cd9` (cohérence), `566bf3c` (contingentées), `f9e09b3` (assistant)
 - LLM : Albert API, modèle par défaut `gpt-oss-120b`, sélecteur de modèle actif (`ASSISTANT_MODEL_CHOICE=true`). Le quota (10 requêtes/min, 1 000/jour) est **partagé** entre tous les utilisateurs.
 - 19 appels assistant tracés, le dernier le 2026-10-08. Aucune erreur 5xx sur les dernières 24 h.
+- MonServiceSécurisé (ANSSI) : clone de référence dans `~/AIPD/mon-service-securise` (master `ad81030e6`, 2026-11-10), ignoré par git, **jamais lancé**. Ne pas utiliser leur `docker-compose.yml` tel quel (Postgres ouvert sans mot de passe sur 5432) : écrire un compose Podman dans `env/` le moment venu. Mise à jour : `git -C ~/AIPD/mon-service-securise pull`.
 - Code : rien de non commité dans `pia` ni `pia-back`. Dans `~/AIPD`, les pointeurs `pia` et `pia-back` (sous-dépôts) ne sont pas mis à jour vers `feature/prefill`, volontairement pour l'instant.
 
 ## 3. Fonctions de l'assistant
@@ -80,3 +81,4 @@ Les détails d'exploitation (sauvegardes, mails, passage en production) sont dan
 - **2026-10-08 → 10-09** : conteneurisation (dev, serveur, Electron Windows) ; assistant Albert (M'aider, sélecteur de modèle) ; questions simplifiées statiques ; matrice de dépendances pour le DPO ; réponses contingentées et cohérence sur `feature/prefill`.
 - **2026-11-10** : reprise après un mois. Tous les services tournent. Création de ce carnet et de la skill `aipd-reprise`. Matrice de dépendances reconstruite depuis `dependencies.yml`.
 - **2026-11-10 (pause)** : matrice de dépendances reconstruite ; document « Questions élémentaires PIA — sections 1 et 2 » rédigé pour le DPO (29 questions, arbre de décision de la base légale). Aucun code modifié. Reprise : relecture DPO des deux documents.
+- **2026-11-10** : clone de MonServiceSécurisé (Apache-2.0, Node/Express + Svelte + Postgres 14) pour le futur projet combiné PIA + analyse de risques.
