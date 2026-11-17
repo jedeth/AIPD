@@ -1,6 +1,6 @@
 # Carnet de bord — PIA académie + assistant IA
 
-> Dernière mise à jour : **2026-11-10** (pause en fin de session).
+> Dernière mise à jour : **2026-11-17** (reprise).
 > Tenu à jour par la skill `aipd-reprise` à chaque pause et à chaque reprise.
 > **Aucun secret ici** : ce fichier est versionné (dépôt `jedeth/AIPD`). Les secrets sont dans `env/server/.env` et `env/server/admin.secret` (droits 600).
 
@@ -18,7 +18,7 @@
 | Front de dev (ng serve) | http://localhost:4200 — mode local par défaut, à basculer en mode serveur comme ci-dessus |
 | PIA de démonstration | n° 8 « Cantine - badges élèves (essai prefill) » (contient des incohérences volontaires) |
 
-## 2. État actuel (constaté le 2026-11-10, à la pause)
+## 2. État actuel (constaté le 2026-11-17, à la reprise)
 
 - Conteneurs : `pia-front` (nginx, 8080), `pia-back` (Rails), `pia-db` (Postgres 16, base `pia_production`) et `pia-dev` (ng serve, 4200) sont tous **Up**. Le front répond 200, `/api/assistant/status` répond 401 sans jeton, ce qui est attendu.
 - Branche déployée : **`feature/prefill`** sur les deux dépôts (front `dist` et image back).
@@ -27,7 +27,7 @@
 - LLM : Albert API, modèle par défaut `gpt-oss-120b`, sélecteur de modèle actif (`ASSISTANT_MODEL_CHOICE=true`). Le quota (10 requêtes/min, 1 000/jour) est **partagé** entre tous les utilisateurs.
 - 19 appels assistant tracés, le dernier le 2026-10-08. Aucune erreur 5xx sur les dernières 24 h.
 - MonServiceSécurisé (ANSSI) : installé le 2026-11-10, conteneurs `mss-web` (127.0.0.1:8090) et `mss-db`, projet `mss` (`env/mss/`). Sources `~/AIPD/mon-service-securise` (ignoré par git), branche `local/connexion-dev` = master ANSSI + connexion locale sans ProConnect (correctif commité localement : `8cfc3c8ab`, pas de dépôt distant). Ne jamais exposer au-delà de 127.0.0.1.
-- MSS au 2026-11-10 : conteneurs Up, page d'accueil 200, aucun compte ni service encore créé, aucune erreur.
+- MSS au 2026-11-17 : conteneurs Up, page d'accueil 200, aucun compte ni service encore créé, aucune erreur.
 - Code : rien de non commité dans `pia`, `pia-back` ni `mon-service-securise`. Dans `~/AIPD`, les pointeurs `pia` et `pia-back` (sous-dépôts) ne sont pas mis à jour vers `feature/prefill`, volontairement pour l'instant.
 
 ## 3. Fonctions de l'assistant
@@ -87,3 +87,5 @@ Les détails d'exploitation (sauvegardes, mails, passage en production) sont dan
 - **2026-11-10** : clone de MonServiceSécurisé (Apache-2.0, Node/Express + Svelte + Postgres 14) pour le futur projet combiné PIA + analyse de risques.
 - **2026-11-10** : installation locale de MonServiceSécurisé (Podman, Postgres 14, chiffrement ChaCha20 actif, e-mails dans les logs) ; connexion ProConnect contournée par un formulaire local (choix utilisateur).
 - **2026-11-10 (pause)** : MonServiceSécurisé installé et vérifié dans le navigateur ; note de cadrage du combo PIA + MSS rédigée pour le DPO. Reprise : retours du DPO sur les 3 documents (matrice, questions élémentaires, note de cadrage).
+- **2026-11-17** : reprise, état constaté : les 6 conteneurs (`pia-*`, `mss-*`) sont Up, 8080/4200/8090 répondent 200, aucune erreur 5xx, rien de non commité. En attente des retours du DPO.
+- **2026-11-17** : retours du DPO reportés dans « Questions élémentaires » (18 validées, 10 à reformuler, A4 refusée, D12 ajoutée). Note de cadrage : option 2 validée par le DPO, ajout de la variante « portail unique » (pas de fusion du code) avec maquette des 5 écrans.
