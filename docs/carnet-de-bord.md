@@ -43,7 +43,7 @@
 | Entretien guidé, relecture d'une réponse, glossaire | **À faire** (plan V1) |
 | Suggestions de mesures en 3.1 | À faire (ce sont des entités distinctes) |
 | Parcours guidé (`/#/pia/:id/parcours`) : décrire → vérifier (IA + recherche Légifrance/CNIL) → compléter → pré-remplir le PIA (sections 1-2) | Fait (prototype, 26 informations). Champs en brouillon dans `pia-back/config/assistant/guided.yml` (`validated: false`) |
-| Étape 4 Sécurité : service créé dans MonServiceSécurisé, risques/mesures relus, menaces reportées en 3.2.2/3.3.2/3.4.2 | Fait (prototype). Correspondances en brouillon dans `pia-back/config/assistant/security.yml` (DPO + RSSI). Étape 5 Valider à faire |
+| Étape 4 Sécurité : service créé dans MonServiceSécurisé, risques/mesures relus, menaces reportées en 3.2.2/3.3.2/3.4.2 | Fait (prototype). Correspondances en brouillon dans `pia-back/config/assistant/security.yml` (DPO + RSSI). Étape 5 Valider faite : bilan, mesures indispensables MSS en 3.1 (une fiche par catégorie), pré-remplissage rejouable |
 
 ## 4. Prochaine étape
 
@@ -98,3 +98,4 @@ Les détails d'exploitation (sauvegardes, mails, passage en production) sont dan
 - **2026-11-17** : parcours guidé (branche `feature/guided`, commits locaux `42cc647` / `ae41bd8e`) : déduction par Albert, recherche de textes dans les collections Légifrance et décisions CNIL d'Albert, étape 3, report en brouillon dans les questions 1.1.1 à 2.2.6 sans écraser l'existant. Testé par l'utilisateur sur la PIA n° 10. « M'aider » n'invente plus de durées.
 - **2026-11-17** : parcours guidé étendu aux sections 1 et 2 complètes (26 informations en blocs A-D, report sur les 18 questions 1.1.1-2.2.7, droits selon la base légale), deux appels Albert en parallèle (~45 s), polices agrandies. Séance DPO prévue vendredi 2026-11-20. pia/pia-back : commits locaux, pas de remote personnel (à créer : jedeth/pia, jedeth/pia-back).
 - **2026-11-17** : étape 4 Sécurité : passerelle `/integration/pia` dans MSS (commit local `a881e9562`), pia-back relié au réseau `mss_default`, service créé dans MSS depuis la PIA n° 10 (niveau avancé, 8 risques dont 7 élevés, 113 mesures), menaces reportées en section 3. Commits locaux pia-back `4c063bb`, pia `ce5e962f`.
+- **2026-11-17** : étape 5 Valider, parcours linéaire, report rejouable sans doublon (après analyse du premier export PDF) ; demande Grist n° 24 scorée (65/100) et fiche `SUIVI.md` poussée dans le Grist de l'incubateur.

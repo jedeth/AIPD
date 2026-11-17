@@ -20,7 +20,7 @@ echeance: 2026-11-20
 blocage: 
 decision_attendue: Validation par le DPO des questions et du parcours ; forme du déploiement (académie ou mutualisé)
 charge_estimee: 
-charge_consommee: 0
+charge_consommee: 1
 ---
 
 ## Objectif
@@ -49,6 +49,9 @@ Aider les agents non spécialistes à réaliser une analyse d'impact (AIPD) avec
 
 ## Journal
 
+- 2026-11-17 · code · Premier export PDF d'une analyse de test : les brouillons se répétaient à chaque report. Corrigé : report rejouable sans doublon et texte de l'agent conservé, brouillon seulement si l'information principale de la question est connue, chaque risque MonServiceSécurisé rattaché à un seul risque du PIA. Analyse de test nettoyée.
+- 2026-11-17 · livrable · Parcours rendu linéaire : le pré-remplissage du PIA se fait à la fin, à l'étape Valider.
+- 2026-11-17 · livrable · Étape Valider du parcours : bilan des questions remplies, report des mesures indispensables de MonServiceSécurisé dans le PIA (une fiche par catégorie), liens vers l'avis du DPO, la validation du PIA et l'homologation.
 - 2026-11-17 · décision · Scoring réalisé : 65/100, priorité forte. 80/100 si les 5 points à instruire se confirment.
 - 2026-11-17 · décision · Fiche de suivi ouverte en phase Prototype : prototype fonctionnel sur le serveur de développement, relu par le DPO.
 - 2026-11-17 · livrable · Étape Sécurité du parcours : le service est créé dans MonServiceSécurisé, ses risques et mesures sont relus, les risques sont proposés comme menaces en section 3 du PIA.
