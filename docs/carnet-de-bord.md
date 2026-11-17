@@ -21,7 +21,9 @@
 ## 2. État actuel (constaté le 2026-11-17, à la reprise)
 
 - Conteneurs : `pia-front` (nginx, 8080), `pia-back` (Rails), `pia-db` (Postgres 16, base `pia_production`) et `pia-dev` (ng serve, 4200) sont tous **Up**. Le front répond 200, `/api/assistant/status` répond 401 sans jeton, ce qui est attendu.
-- Branche déployée : **`feature/prefill`** sur les deux dépôts (front `dist` et image back).
+- Branche déployée : **`feature/guided`** (issue de `feature/prefill`) sur les deux dépôts (front `dist` et image back). Commits **locaux uniquement** : `origin` pointe vers LINCnil (amont CNIL), on n'y pousse pas.
+  - pia : `ae41bd8e` (parcours guidé)
+  - pia-back : `42cc647` (parcours guidé, report dans le PIA)
   - pia : `815ca92d` (cohérence), `01e2f337` (réponses contingentées), `c8ae8fe1`, `adb4bc5c`
   - pia-back : `aaa4cd9` (cohérence), `566bf3c` (contingentées), `f9e09b3` (assistant)
 - LLM : Albert API, modèle par défaut `gpt-oss-120b`, sélecteur de modèle actif (`ASSISTANT_MODEL_CHOICE=true`). Le quota (10 requêtes/min, 1 000/jour) est **partagé** entre tous les utilisateurs.
@@ -40,6 +42,7 @@
 | Contrôles de cohérence (6 contrôles) | Faite. Contrôles en brouillon (`validated: false`) |
 | Entretien guidé, relecture d'une réponse, glossaire | **À faire** (plan V1) |
 | Suggestions de mesures en 3.1 | À faire (ce sont des entités distinctes) |
+| Parcours guidé (`/#/pia/:id/parcours`) : décrire → vérifier (IA + recherche Légifrance/CNIL) → compléter → pré-remplir le PIA | Fait (prototype). Champs en brouillon dans `pia-back/config/assistant/guided.yml` (`validated: false`). Étapes 4 Sécurité et 5 Valider à faire |
 
 ## 4. Prochaine étape
 
@@ -89,3 +92,4 @@ Les détails d'exploitation (sauvegardes, mails, passage en production) sont dan
 - **2026-11-10 (pause)** : MonServiceSécurisé installé et vérifié dans le navigateur ; note de cadrage du combo PIA + MSS rédigée pour le DPO. Reprise : retours du DPO sur les 3 documents (matrice, questions élémentaires, note de cadrage).
 - **2026-11-17** : reprise, état constaté : les 6 conteneurs (`pia-*`, `mss-*`) sont Up, 8080/4200/8090 répondent 200, aucune erreur 5xx, rien de non commité. En attente des retours du DPO.
 - **2026-11-17** : retours du DPO reportés dans « Questions élémentaires » (18 validées, 10 à reformuler, A4 refusée, D12 ajoutée). Note de cadrage : option 2 validée par le DPO, ajout de la variante « portail unique » (pas de fusion du code) avec maquette des 5 écrans.
+- **2026-11-17** : parcours guidé (branche `feature/guided`, commits locaux `42cc647` / `ae41bd8e`) : déduction par Albert, recherche de textes dans les collections Légifrance et décisions CNIL d'Albert, étape 3, report en brouillon dans les questions 1.1.1 à 2.2.6 sans écraser l'existant. Testé par l'utilisateur sur la PIA n° 10. « M'aider » n'invente plus de durées.
