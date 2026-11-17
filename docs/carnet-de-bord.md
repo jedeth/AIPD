@@ -1,6 +1,6 @@
 # Carnet de bord — PIA académie + assistant IA
 
-> Dernière mise à jour : **2026-11-17** (reprise).
+> Dernière mise à jour : **2026-11-17** (pause en fin de session).
 > Tenu à jour par la skill `aipd-reprise` à chaque pause et à chaque reprise.
 > **Aucun secret ici** : ce fichier est versionné (dépôt `jedeth/AIPD`). Les secrets sont dans `env/server/.env` et `env/server/admin.secret` (droits 600).
 
@@ -18,19 +18,15 @@
 | Front de dev (ng serve) | http://localhost:4200 — mode local par défaut, à basculer en mode serveur comme ci-dessus |
 | PIA de démonstration | n° 8 « Cantine - badges élèves (essai prefill) » (contient des incohérences volontaires) |
 
-## 2. État actuel (constaté le 2026-11-17, à la reprise)
+## 2. État actuel (constaté le 2026-11-17, à la pause)
 
-- Conteneurs : `pia-front` (nginx, 8080), `pia-back` (Rails), `pia-db` (Postgres 16, base `pia_production`) et `pia-dev` (ng serve, 4200) sont tous **Up**. Le front répond 200, `/api/assistant/status` répond 401 sans jeton, ce qui est attendu.
-- Branche déployée : **`feature/guided`** (issue de `feature/prefill`) sur les deux dépôts (front `dist` et image back). Commits **locaux uniquement** : `origin` pointe vers LINCnil (amont CNIL), on n'y pousse pas.
-  - pia : `ae41bd8e`, puis commit « grouped by block » (parcours guidé)
-  - pia-back : `42cc647`, puis commit « covers sections 1 and 2 » (parcours guidé, report dans le PIA)
-  - pia : `815ca92d` (cohérence), `01e2f337` (réponses contingentées), `c8ae8fe1`, `adb4bc5c`
-  - pia-back : `aaa4cd9` (cohérence), `566bf3c` (contingentées), `f9e09b3` (assistant)
-- LLM : Albert API, modèle par défaut `gpt-oss-120b`, sélecteur de modèle actif (`ASSISTANT_MODEL_CHOICE=true`). Le quota (10 requêtes/min, 1 000/jour) est **partagé** entre tous les utilisateurs.
-- 19 appels assistant tracés, le dernier le 2026-10-08. Aucune erreur 5xx sur les dernières 24 h.
-- MonServiceSécurisé (ANSSI) : installé le 2026-11-10, conteneurs `mss-web` (127.0.0.1:8090) et `mss-db`, projet `mss` (`env/mss/`). Sources `~/AIPD/mon-service-securise` (ignoré par git), branche `local/connexion-dev` = master ANSSI + connexion locale sans ProConnect (correctif commité localement : `8cfc3c8ab`, pas de dépôt distant). Ne jamais exposer au-delà de 127.0.0.1.
-- MSS au 2026-11-17 : conteneurs Up, page d'accueil 200, aucun compte ni service encore créé, aucune erreur.
-- Code : rien de non commité dans `pia`, `pia-back` ni `mon-service-securise`. Dans `~/AIPD`, les pointeurs `pia` et `pia-back` (sous-dépôts) ne sont pas mis à jour vers `feature/prefill`, volontairement pour l'instant.
+- Conteneurs `pia-front` (8080), `pia-back`, `pia-db`, `pia-dev` (4200), `mss-web` (127.0.0.1:8090) et `mss-db` : tous **Up**. Le front répond 200, `/api/assistant/status` 401 sans jeton (attendu). Aucune erreur 5xx sur 24 h. 33 appels assistant tracés.
+- Branche déployée : **`feature/guided`** sur `pia` (`1e8af230`) et `pia-back` (`617af92`) : parcours guidé complet, étapes 1 à 5. Commits **locaux uniquement** : `origin` = LINCnil, on n'y pousse pas (dépôts privés `jedeth/pia` et `jedeth/pia-back` à créer).
+- MonServiceSécurisé : branche `local/connexion-dev` (`a881e9562`, passerelle `/integration/pia`, secret partagé dans les deux `.env`). `pia-back` est relié au réseau `mss_default`. 1 compte (`admin@pia.local`) et 1 service (créé depuis la PIA n° 10). Ne jamais exposer au-delà de 127.0.0.1.
+- PIA n° 10 « test_parcours_assiste » : parcours de test complet ; brouillons nettoyés (un seul par question) après l'analyse du premier export PDF.
+- LLM : Albert API, `gpt-oss-120b` par défaut ; la déduction du parcours fait deux appels en parallèle (~45 s) et une recherche dans les collections Légifrance et décisions CNIL d'Albert.
+- Code : rien de non commité dans `pia`, `pia-back`, `mon-service-securise`. Dans `~/AIPD`, les pointeurs `pia` et `pia-back` ne sont pas mis à jour, volontairement.
+- Incubateur : demande Grist n° 24 (assistant PIA) scorée 65/100, fiche `SUIVI.md` poussée dans le Grist ; le même jour, scoring et suivi des demandes n° 11 (assistant de langues, portefeuille) et n° 25 (Établi, dépôt Établi).
 
 ## 3. Fonctions de l'assistant
 
@@ -47,16 +43,10 @@
 
 ## 4. Prochaine étape
 
-0. **Séance DPO vendredi 2026-11-20** : démo du parcours guidé sur la PIA n° 10 (étapes 1 à 4), faire viser `guided.yml` (26 informations) et `security.yml` (correspondances PIA → MSS, avec le RSSI). Signaler : l'inscription MSS par le navigateur bloque sur « Vos consentements » (cause non trouvée, compte créé par l'API) ; durées de conservation et cadre réglementaire restent à valider.
-
-1. **Récupérer les décisions du DPO** de la réunion du 2026-10-13. La « Matrice de dépendances PIA » a été reconstruite le 2026-11-10 (Claude Docs, https://claude.ai/artifact/WpZsq1ePB3ioEFDLhi4PDh) : décisions DPO à ressaisir dedans.
-2. Reporter ces décisions dans `dependencies.yml` (`validated`, `rules_validated`). Importer le CSV relu des questions simplifiées : `python3 env/tools/simplified_questions_review.py import`.
-3. Faire relire au DPO « Questions élémentaires PIA — sections 1 et 2 » (https://claude.ai/artifact/CX67rPkbtZPYK4aS78kHX2) : 29 questions qui alimentent les 18 questions CNIL des sections 1-2 (futur « parcours guidé »). La section 3 sera traitée plus tard avec MonServiceSécurisé (ANSSI).
-4. Faire valider au DPO la note de cadrage « Combo PIA + MonServiceSécurisé » (https://claude.ai/artifact/UgPdhSWYGDkz2eVtSDr8Dy) : option 2 recommandée (socle commun + passerelles : import Excel vers MSS, API publique MSS en lecture pour mesures/risques).
-5. Décider de la suite :
-   - fusionner `feature/prefill` dans `feature/assistant` ;
-   - attaquer les fonctions V1 restantes ;
-   - corriger la faille amont `PiaPolicy#show?` (`is_example`), sur une branche séparée.
+1. **Séance DPO vendredi 2026-11-20** : démo du parcours guidé sur la PIA n° 10 (étapes 1 à 5) ; faire viser `pia-back/config/assistant/guided.yml` (26 informations), `security.yml` (correspondances PIA → MSS, avec le RSSI) et la répartition des informations entre questions CNIL (reprise complète ou renvoi). Points à lui signaler : intérêt légitime exclu pour une autorité publique ; durées de conservation et cadre réglementaire ; inscription MSS bloquée dans le navigateur (« Vos consentements »).
+2. Reporter ses décisions dans `guided.yml`, `security.yml` et `dependencies.yml` (`validated: true`).
+3. Créer les dépôts privés `jedeth/pia`, `jedeth/pia-back` (et `mon-service-securise`) pour sauvegarder le code hors du serveur.
+4. Ensuite : mise en production (serveur DRASI, authentification), schéma de décision de la base légale à mettre à jour (D12), table de correspondance des catégories PIA ↔ MSS demandée par le DPO.
 
 ## 5. Commandes utiles
 
@@ -99,3 +89,4 @@ Les détails d'exploitation (sauvegardes, mails, passage en production) sont dan
 - **2026-11-17** : parcours guidé étendu aux sections 1 et 2 complètes (26 informations en blocs A-D, report sur les 18 questions 1.1.1-2.2.7, droits selon la base légale), deux appels Albert en parallèle (~45 s), polices agrandies. Séance DPO prévue vendredi 2026-11-20. pia/pia-back : commits locaux, pas de remote personnel (à créer : jedeth/pia, jedeth/pia-back).
 - **2026-11-17** : étape 4 Sécurité : passerelle `/integration/pia` dans MSS (commit local `a881e9562`), pia-back relié au réseau `mss_default`, service créé dans MSS depuis la PIA n° 10 (niveau avancé, 8 risques dont 7 élevés, 113 mesures), menaces reportées en section 3. Commits locaux pia-back `4c063bb`, pia `ce5e962f`.
 - **2026-11-17** : étape 5 Valider, parcours linéaire, report rejouable sans doublon (après analyse du premier export PDF) ; demande Grist n° 24 scorée (65/100) et fiche `SUIVI.md` poussée dans le Grist de l'incubateur.
+- **2026-11-17 (pause)** : parcours guidé complet (étapes 1 à 5, MonServiceSécurisé relié), premier export analysé et corrigé ; demandes 24, 11 et 25 scorées et suivies dans le Grist de l'incubateur ; widget de scoring rendu générique. Reprise : séance DPO du 2026-11-20.
