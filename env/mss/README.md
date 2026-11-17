@@ -14,6 +14,19 @@ e-mail / prénom / nom, **sans aucune vérification d'identité**. L'instance ne
 au-delà de `127.0.0.1`. Un nouvel e-mail mène à la création de compte (choix de l'organisation via
 l'API publique recherche-entreprises).
 
+## Passerelle PIA (parcours guidé, étape Sécurité)
+
+La branche `local/connexion-dev` ajoute aussi `src/routes/integration/routesIntegrationPia.ts` :
+- `POST /integration/pia/services` crée un service V2 au nom d'un utilisateur MSS existant (désigné par
+  son e-mail, le même que dans PIA) ; sans `niveauSecurite`, MSS applique le niveau minimal requis ;
+- `GET /integration/pia/services/:id?email=…` renvoie risques (avec niveau faible/moyen/élevé),
+  mesures et indice cyber.
+
+Appels serveur à serveur uniquement : secret partagé `MSS_INTEGRATION_PIA_SECRET` (dans `.env`, et
+`MSS_INTEGRATION_SECRET` dans `env/server/.env`), en-tête `x-integration-secret`. Sans secret, 404.
+`pia-back` rejoint le réseau `mss_default` et appelle `http://mss-web:3000` avec l'en-tête
+`Host: localhost:8090` (MSS redirige tout autre hôte vers son URL publique).
+
 ## Configuration
 
 `.env` (droits 600, jamais versionné) : mot de passe Postgres, secrets cookie/JWT, clé ChaCha20

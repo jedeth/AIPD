@@ -29,6 +29,10 @@ services:
       - ./zz_container_overrides.rb:/rails/config/initializers/zz_container_overrides.rb:ro
       - pia_storage:/rails/storage
       - pia_mails:/rails/tmp/mails
+    # mss : réseau de l'instance MonServiceSécurisé (env/mss), pour la passerelle du parcours guidé
+    networks:
+      - default
+      - mss
     depends_on:
       - db
     restart: unless-stopped
@@ -52,3 +56,9 @@ volumes:
   pia_pgdata:
   pia_storage:
   pia_mails:
+
+networks:
+  default: {}
+  mss:
+    external: true
+    name: mss_default
