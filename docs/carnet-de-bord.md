@@ -46,6 +46,13 @@
 ## 4. Prochaine étape
 
 1. **Séance DPO 2026-11-26** (suivre le déroulé ci-dessus) : démo du parcours guidé sur la PIA n° 10 (étapes 1 à 5) ; faire viser `pia-back/config/assistant/guided.yml` (26 informations), `security.yml` (correspondances PIA → MSS, avec le RSSI) et la répartition des informations entre questions CNIL (reprise complète ou renvoi). Points à lui signaler : intérêt légitime exclu pour une autorité publique ; durées de conservation et cadre réglementaire ; inscription MSS bloquée dans le navigateur (« Vos consentements »).
+1 bis. **Demandes de la séance DPO du 2026-11-26** (à traiter) :
+   - Volume : Albert doit proposer une estimation chiffrée du nombre de personnes (ordre de grandeur d'un lycée), pas seulement une tranche en liste déroulante.
+   - Données : pour chaque catégorie de données, préciser le détail (nom, prénom, classe…).
+   - Mesures MSS → PIA : report automatique en 3.1 au pré-remplissage (déployé le 2026-11-26, non commité) ; surtout, **qualifier les mesures MSS pour qu'elles coïncident avec les mesures proposées par le PIA** (table de correspondance mesure MSS → mesure PIA, à faire viser par le DPO et le RSSI).
+   - Chaque mesure proposée par MSS doit être indiquée **mise en œuvre ou non** par le porteur de projet.
+   - Décisions du 2026-11-26 sur ces deux points : (a) les mesures du PIA sont des **catégories** ; chaque mesure précise de MSS doit être rangée dans une catégorie PIA (aucune mesure « hors catégorie ») ; (b) le porteur indique l'état (mise en œuvre ou non) **dans le parcours du PIA, après l'import**, et non dans MSS.
+   - Ouverture de MSS local sans authentification depuis le parcours (codé le 2026-11-26 : `/oidc/connexion-directe`, option `MSS_DIRECT_LOGIN`, déployé le 2026-11-26, non commité ; à essayer dans le navigateur).
 2. Reporter ses décisions dans `guided.yml`, `security.yml` et `dependencies.yml` (`validated: true`).
 3. Créer les dépôts privés `jedeth/pia`, `jedeth/pia-back` (et `mon-service-securise`) pour sauvegarder le code hors du serveur.
 4. Ensuite : mise en production (serveur DRASI, authentification), schéma de décision de la base légale à mettre à jour (D12), table de correspondance des catégories PIA ↔ MSS demandée par le DPO.
