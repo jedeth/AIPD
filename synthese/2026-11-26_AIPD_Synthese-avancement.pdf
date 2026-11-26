@@ -1,0 +1,165 @@
+%PDF-1.4
+%âãÏÓ
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 2 /Kids [6 0 R 8 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 7543 >>
+stream
+0.11 0.31 0.57 rg BT /F2 8.5 Tf 56.00 770.16 Td (SYNTHÈSE D'AVANCEMENT) Tj ET
+0.11 0.31 0.57 rg BT /F2 17 Tf 56.00 746.70 Td (Assistant IA pour les analyses d'impact \(PIA\)) Tj ET
+0.12 0.15 0.20 rg BT /F2 9.5 Tf 56.00 723.59 Td (Chef de projet / référent :) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 176.66 723.59 Td (Jérôme de Thésut) Tj ET
+0.12 0.15 0.20 rg BT /F2 9.5 Tf 56.00 708.48 Td (Commanditaire :) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 138.21 708.48 Td (Bartholomé Gillery \(DPO de l'académie de Paris\)) Tj ET
+0.12 0.15 0.20 rg BT /F2 9.5 Tf 56.00 693.37 Td (Porteur :) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 102.63 693.37 Td (Jérôme de Thésut) Tj ET
+0.12 0.15 0.20 rg BT /F2 9.5 Tf 56.00 678.26 Td (Date de début :) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 133.16 678.26 Td (2026-11-17) Tj ET
+0.12 0.15 0.20 rg BT /F2 9.5 Tf 56.00 663.15 Td (Date de fin prévue :) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 152.36 663.15 Td (2027-02-01) Tj ET
+0.12 0.15 0.20 rg BT /F2 9.5 Tf 56.00 648.04 Td (Phase :) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 98.12 648.04 Td (Prototype — Météo : vert — Score : 65) Tj ET
+0.12 0.15 0.20 rg BT /F2 9.5 Tf 56.00 632.93 Td (Charge :) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 102.63 632.93 Td (2 demi-journées consommées sur non renseigné estimées) Tj ET
+0.11 0.31 0.57 rg BT /F2 9.5 Tf 56.00 606.82 Td (OBJECTIF) Tj ET
+0.79 0.82 0.85 RG 0.6 w 56.00 604.82 m 539.28 604.82 l S
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 56.00 588.71 Td (Aider les agents non spécialistes à réaliser une analyse d'impact \(AIPD\) avec le logiciel PIA de la CNIL :) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 56.00 575.60 Td (description libre du projet, propositions d'Albert à valider, pré-remplissage des sections 1 et 2, risques de sécurité) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 56.00 562.49 Td (calculés par MonServiceSécurisé \(ANSSI\) pour la section 3. Public : porteurs de projets de l'académie, DPO et) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 56.00 549.38 Td (RSSI.) Tj ET
+0.11 0.31 0.57 rg BT /F2 9.5 Tf 56.00 521.27 Td (PARTENAIRES ET INTERLOCUTEURS) Tj ET
+0.79 0.82 0.85 RG 0.6 w 56.00 519.27 m 539.28 519.27 l S
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 503.16 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 503.16 Td (Bartholomé Gillery \(DPO de l'académie de Paris\) : commanditaire) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 487.05 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 487.05 Td (Jérôme de Thésut \(pôle IA, incubateur\) : chef de projet, seul mainteneur) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 470.94 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 470.94 Td (RSSI de l'académie : validation commune des mesures de sécurité) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 454.83 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 454.83 Td (DRASI : hébergement de production et authentification) Tj ET
+0.11 0.31 0.57 rg BT /F2 9.5 Tf 56.00 427.72 Td (ÉTAT D'AVANCEMENT \(quatre dernières semaines\)) Tj ET
+0.79 0.82 0.85 RG 0.6 w 56.00 425.72 m 539.28 425.72 l S
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 409.61 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 409.61 Td (2026-11-26 · livrable · Premier jet de la table de correspondance entre les 135 mesures de MonServiceSécurisé) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 396.50 Td (et les 29 catégories de mesures du PIA, remis au DPO avec sept questions \(PDF et page de relecture en ligne\).) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 380.39 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 380.39 Td (2026-11-26 · code · Le pré-remplissage du PIA reporte aussi les mesures de MonServiceSécurisé en section) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 367.28 Td (3.1 ; MonServiceSécurisé s'ouvre depuis le parcours sans nouvelle authentification \(instance locale\).) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 351.17 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 351.17 Td (2026-11-26 · décision · Séance DPO : les mesures de MonServiceSécurisé seront rangées dans les catégories) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 338.06 Td (de mesures du PIA ; le porteur de projet indiquera dans le parcours si chaque mesure est mise en œuvre.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 321.95 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 321.95 Td (2026-11-26 · réunion · Séance avec le DPO : démonstration du parcours guidé sur un cas de test. Demandes :) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 308.84 Td (estimation chiffrée du nombre de personnes concernées, détail des données par catégorie, meilleure) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 295.73 Td (correspondance des mesures de sécurité avec celles du PIA.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 279.62 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 279.62 Td (2026-11-20 · code · Délais d'attente allongés après un ralentissement d'Albert qui interrompait l'analyse.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 263.51 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 263.51 Td (2026-11-17 · code · Premier export PDF d'une analyse de test : les brouillons se répétaient à chaque report.) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 250.40 Td (Corrigé : report rejouable sans doublon et texte de l'agent conservé, brouillon seulement si l'information) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 237.29 Td (principale de la question est connue, chaque risque MonServiceSécurisé rattaché à un seul risque du PIA.) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 224.18 Td (Analyse de test nettoyée.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 208.07 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 208.07 Td (2026-11-17 · livrable · Parcours rendu linéaire : le pré-remplissage du PIA se fait à la fin, à l'étape Valider.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 191.96 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 191.96 Td (2026-11-17 · livrable · Étape Valider du parcours : bilan des questions remplies, report des mesures) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 178.85 Td (indispensables de MonServiceSécurisé dans le PIA \(une fiche par catégorie\), liens vers l'avis du DPO, la) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 165.74 Td (validation du PIA et l'homologation.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 149.63 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 149.63 Td (2026-11-17 · décision · Scoring réalisé : 65/100, priorité forte. 80/100 si les 5 points à instruire se confirment.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 133.52 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 133.52 Td (2026-11-17 · décision · Fiche de suivi ouverte en phase Prototype : prototype fonctionnel sur le serveur de) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 120.41 Td (développement, relu par le DPO.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 104.30 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 104.30 Td (2026-11-17 · livrable · Étape Sécurité du parcours : le service est créé dans MonServiceSécurisé, ses risques et) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 91.19 Td (mesures sont relus, les risques sont proposés comme menaces en section 3 du PIA.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 75.08 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 75.08 Td (2026-11-17 · livrable · Parcours guidé des sections 1 et 2 : description libre, propositions d'Albert avec) Tj ET
+0.79 0.82 0.85 RG 0.4 w 56.00 56.00 m 539.28 56.00 l S
+0.36 0.41 0.47 rg BT /F1 7.5 Tf 56.00 42.00 Td (Synthèse d'avancement — Assistant IA pour les analyses d'impact \(PIA\)) Tj ET
+0.36 0.41 0.47 rg BT /F1 7.5 Tf 524.68 42.00 Td (1 / 2) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Contents 5 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+7 0 obj
+<< /Length 4573 >>
+stream
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 768.78 Td (recherche dans Légifrance et les délibérations de la CNIL, pré-remplissage des 18 questions sans écraser) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 755.67 Td (l'existant.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 739.56 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 739.56 Td (2026-11-17 · échange · Retours du DPO sur les questions élémentaires et la note de cadrage : option « socle) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 726.45 Td (commun et passerelles » retenue, MonServiceSécurisé réservé aux traitements reposant sur un service) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 713.34 Td (numérique, validation commune DPO et RSSI pour la sécurité.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 697.23 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 697.23 Td (2026-11-10 · livrable · Installation locale de MonServiceSécurisé \(ANSSI\) ; note de cadrage PIA et) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 684.12 Td (MonServiceSécurisé et questions élémentaires remises au DPO.) Tj ET
+0.12 0.15 0.20 rg BT /F2 9.5 Tf 56.00 665.01 Td (À FAIRE :) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 108.85 665.01 Td (Relecture par le DPO de la table de correspondance des mesures et réponses aux sept questions ;) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 108.85 651.90 Td (puis intégration au parcours — Bartholomé Gillery, pour le non renseigné) Tj ET
+0.12 0.15 0.20 rg BT /F2 9.5 Tf 56.00 636.79 Td (BLOCAGE :) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 118.45 636.79 Td (non renseigné) Tj ET
+0.12 0.15 0.20 rg BT /F2 9.5 Tf 56.00 621.68 Td (DÉCISION ATTENDUE :) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 176.05 621.68 Td (Validation par le DPO et le RSSI de la table de correspondance des mesures ; visa) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 176.05 608.57 Td (des listes du parcours ; forme du déploiement \(académie ou mutualisé\)) Tj ET
+0.11 0.31 0.57 rg BT /F2 9.5 Tf 56.00 582.46 Td (DOCUMENTS CLÉS) Tj ET
+0.79 0.82 0.85 RG 0.6 w 56.00 580.46 m 539.28 580.46 l S
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 564.35 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 564.35 Td (Scoring : joint dans la colonne Documents) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 548.24 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 548.24 Td (Carnet de bord technique : dans le dépôt du projet) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 532.13 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 532.13 Td (Note de cadrage PIA et MonServiceSécurisé, questions élémentaires, matrice de dépendances : documents) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 519.02 Td (partagés avec le DPO) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 502.91 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 502.91 Td (Table de correspondance des mesures MonServiceSécurisé et PIA \(premier jet\) : dans le dépôt du projet, et) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 489.80 Td (page de relecture en ligne partagée avec le DPO) Tj ET
+0.11 0.31 0.57 rg BT /F2 9.5 Tf 56.00 462.69 Td (POINTS DE VIGILANCE) Tj ET
+0.79 0.82 0.85 RG 0.6 w 56.00 460.69 m 539.28 460.69 l S
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 444.58 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 444.58 Td (Données personnelles dans les descriptions et les réponses : envoyées seulement à Albert API ; traitement à) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 431.47 Td (inscrire au registre.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 415.36 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 415.36 Td (Un seul mainteneur pour trois bases de code \(PIA, serveur PIA, MonServiceSécurisé\), dont deux reprises à) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 402.25 Td (suivre ; code des adaptations uniquement sur le serveur de développement.) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 386.14 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 386.14 Td (Quotas Albert partagés \(10 requêtes par minute, 1 000 par jour\).) Tj ET
+0.36 0.41 0.47 rg BT /F1 9.5 Tf 58.00 370.03 Td (–) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 370.03 Td (Inscription à MonServiceSécurisé bloquée dans le navigateur à l'étape « Vos consentements » \(cause non) Tj ET
+0.12 0.15 0.20 rg BT /F1 9.5 Tf 68.00 356.92 Td (trouvée\).) Tj ET
+0.36 0.41 0.47 rg BT /F1 8.5 Tf 56.00 333.19 Td (Synthèse établie le 2026-11-26 à partir de la fiche de suivi du projet) Tj ET
+0.79 0.82 0.85 RG 0.4 w 56.00 56.00 m 539.28 56.00 l S
+0.36 0.41 0.47 rg BT /F1 7.5 Tf 56.00 42.00 Td (Synthèse d'avancement — Assistant IA pour les analyses d'impact \(PIA\)) Tj ET
+0.36 0.41 0.47 rg BT /F1 7.5 Tf 524.68 42.00 Td (2 / 2) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Contents 7 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000127 00000 n 
+0000000224 00000 n 
+0000000326 00000 n 
+0000007921 00000 n 
+0000008063 00000 n 
+0000012688 00000 n 
+trailer
+<< /Size 9 /Root 1 0 R >>
+startxref
+12830
+%%EOF
