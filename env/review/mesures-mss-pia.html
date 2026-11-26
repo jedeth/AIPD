@@ -1,0 +1,354 @@
+<title>Mesures MSS et PIA</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Mise en page : une colonne de lecture ; questions en tête, puis la table groupée par catégorie du PIA,
+   chaque mesure sur une ligne avec ses commandes de relecture à droite (empilées sur mobile). */
+:root {
+  --bg: #f5f7fa; --surface: #ffffff; --sunken: #eceff4;
+  --fg: #1c2733; --muted: #5a6978; --line: #d3dae3;
+  --accent: #1d4f91; --accent-fg: #ffffff; --accent-soft: #e3ecf8;
+  --ok: #1f7a4d; --ok-soft: #e0f3e8;
+  --warn: #8a5a00; --warn-soft: #fdf1d3;
+  --drop: #a23b3b; --drop-soft: #f9e4e4;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12181f; --surface: #1a222c; --sunken: #222c38;
+    --fg: #e6ecf2; --muted: #9aa8b7; --line: #344150;
+    --accent: #7fb0ee; --accent-fg: #0f1720; --accent-soft: #1f3350;
+    --ok: #6fcf9b; --ok-soft: #173427;
+    --warn: #f0c060; --warn-soft: #3a2e10;
+    --drop: #f09090; --drop-soft: #3b1e1e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12181f; --surface: #1a222c; --sunken: #222c38;
+  --fg: #e6ecf2; --muted: #9aa8b7; --line: #344150;
+  --accent: #7fb0ee; --accent-fg: #0f1720; --accent-soft: #1f3350;
+  --ok: #6fcf9b; --ok-soft: #173427;
+  --warn: #f0c060; --warn-soft: #3a2e10;
+  --drop: #f09090; --drop-soft: #3b1e1e;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--font-head); text-wrap: balance; margin: 0; }
+h1 { font-size: 1.7rem; line-height: 1.2; font-weight: 600; }
+h2 { font-size: 1.25rem; font-weight: 600; margin-top: 40px; }
+h3 { font-size: 1rem; font-weight: 600; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 68ch; margin-top: 8px; }
+.eyebrow { color: var(--accent); font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+
+.status { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; margin-top: 20px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }
+.meter { display: flex; flex-direction: column; gap: 4px; min-width: 180px; flex: 1 1 200px; }
+.meter b { font-variant-numeric: tabular-nums; font-weight: 600; }
+.bar { height: 6px; background: var(--sunken); border-radius: 3px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--ok); transition: width .25s; }
+.sync { color: var(--muted); font-size: .85rem; }
+.sync[data-state="err"] { color: var(--drop); font-weight: 500; }
+.banner { margin-top: 12px; background: var(--warn-soft); color: var(--warn); border-radius: 8px; padding: 10px 14px; font-size: .9rem; }
+
+.questions { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+.q { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.q p { max-width: 75ch; }
+.q textarea { width: 100%; min-height: 64px; resize: vertical; font: inherit; color: var(--fg); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; }
+.q[data-answered="1"] { border-left: 3px solid var(--ok); }
+.meta { color: var(--muted); font-size: .8rem; min-height: 1.2em; }
+
+.tools { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; padding-block: 10px; margin-top: 12px; border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: .85rem; color: var(--fg); background: var(--surface); border: 1px solid var(--line);
+  border-radius: 999px; padding: 4px 12px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.search { flex: 1 1 180px; min-width: 0; font: inherit; color: var(--fg); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
+
+.family { margin-top: 28px; }
+.family > h3 { color: var(--accent); font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; }
+.cat { margin-top: 14px; }
+.cat-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding-bottom: 6px; }
+.cat-head span { color: var(--muted); font-size: .85rem; font-variant-numeric: tabular-nums; }
+.rows { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.rows:empty::after { content: "Aucune mesure de MonServiceSécurisé dans cette catégorie."; color: var(--muted); font-size: .88rem; padding: 10px 14px; }
+.m { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 8px 16px; padding: 10px 14px; border-top: 1px solid var(--line); border-left: 3px solid transparent; }
+.m:first-child { border-top: 0; }
+.m[data-state="ok"] { border-left-color: var(--ok); }
+.m[data-state="moved"] { border-left-color: var(--accent); background: var(--accent-soft); }
+.m[data-state="drop"] { border-left-color: var(--drop); background: var(--drop-soft); }
+.m-main { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.ref { font-family: var(--font-mono); font-size: .78rem; color: var(--muted); }
+.note { background: var(--warn-soft); color: var(--warn); font-size: .82rem; border-radius: 4px; padding: 3px 8px; align-self: flex-start; }
+.moved-from { color: var(--muted); font-size: .8rem; }
+.m-ctl { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.m-ctl select, .m-ctl input { width: 100%; font: inherit; font-size: .85rem; color: var(--fg); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 6px; padding: 5px 8px; }
+.line { display: flex; gap: 6px; align-items: center; }
+.okbtn { font: inherit; font-size: .85rem; white-space: nowrap; color: var(--ok); background: var(--surface); border: 1px solid var(--ok);
+  border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+.okbtn[aria-pressed="true"] { background: var(--ok); color: var(--surface); }
+button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+:disabled { opacity: .6; cursor: not-allowed; }
+.none { color: var(--muted); padding: 24px 0; }
+@media (max-width: 640px) { .m { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Premier jet du 26 novembre 2026, à valider</p>
+    <h1>Correspondance entre les mesures de MonServiceSécurisé et les mesures du PIA</h1>
+    <p class="lede">Chaque mesure de MonServiceSécurisé (MSS) est rangée dans une catégorie de mesures du PIA, pour être reportée dans la section 3.1 « Mesures existantes ou prévues ». Répondez aux questions, puis validez ou corrigez chaque rattachement. Les saisies sont enregistrées au fur et à mesure et visibles par les autres personnes qui ont la page ouverte.</p>
+    <div class="status" aria-live="polite">
+      <div class="meter"><span>Questions : <b id="n-answers">0</b> réponses sur <b id="t-answers">0</b></span><div class="bar"><i id="bar-answers"></i></div></div>
+      <div class="meter"><span>Mesures : <b id="n-reviewed">0</b> relues sur <b id="t-measures">0</b></span><div class="bar"><i id="bar-reviewed"></i></div></div>
+      <span class="sync" id="sync" data-state="load">Chargement des saisies…</span>
+    </div>
+    <p class="banner" id="banner" hidden></p>
+  </header>
+
+  <section aria-labelledby="h-q">
+    <h2 id="h-q">Questions au DPD</h2>
+    <div class="questions" id="questions"></div>
+  </section>
+
+  <section aria-labelledby="h-t">
+    <h2 id="h-t">Table de correspondance</h2>
+    <p class="lede">Pour chaque mesure : « Valider » confirme la catégorie proposée ; la liste permet d'en choisir une autre ou d'écarter la mesure du PIA. Les remarques sur fond jaune signalent les rattachements à confirmer.</p>
+    <div class="tools">
+      <div class="chips" id="chips" role="group" aria-label="Filtrer les mesures"></div>
+      <input class="search" id="search" type="search" placeholder="Rechercher une mesure ou une référence" aria-label="Rechercher une mesure">
+    </div>
+    <div id="table"></div>
+    <p class="none" id="none" hidden>Aucune mesure ne correspond à ce filtre.</p>
+  </section>
+</div>
+
+<script id="data" type="application/json">{"cats": [{"code": "PIA_TEC_CHIF", "label": "Chiffrement", "section": "Mesures portant sur les données"}, {"code": "PIA_TEC_ANO", "label": "Anonymisation", "section": "Mesures portant sur les données"}, {"code": "PIA_TEC_CLO", "label": "Cloisonnement", "section": "Mesures portant sur les données"}, {"code": "PIA_TEC_CTLA", "label": "Contrôle des accès logiques", "section": "Mesures portant sur les données"}, {"code": "PIA_TEC_LOG", "label": "Journalisation", "section": "Mesures portant sur les données"}, {"code": "PIA_TEC_ARCH", "label": "Archivage", "section": "Mesures portant sur les données"}, {"code": "PIA_TEC_PAP", "label": "Sécurisation des documents papier", "section": "Mesures portant sur les données"}, {"code": "PIA_TEC_MINI", "label": "Minimisation des données", "section": "Mesures portant sur les données"}, {"code": "PIA_SEC_EXP", "label": "Sécurisation de l'exploitation", "section": "Mesures générales de sécurité"}, {"code": "PIA_SEC_MAL", "label": "Lutte contre les logiciels malveillants", "section": "Mesures générales de sécurité"}, {"code": "PIA_SEC_COMP", "label": "Gestion des postes de travail", "section": "Mesures générales de sécurité"}, {"code": "PIA_SEC_WEB", "label": "Protection des sites web", "section": "Mesures générales de sécurité"}, {"code": "PIA_SEC_BKP", "label": "Sauvegarde des données", "section": "Mesures générales de sécurité"}, {"code": "PIA_SEC_MAIN", "label": "Maintenance", "section": "Mesures générales de sécurité"}, {"code": "PIA_SEC_CTR", "label": "Contrat de sous-traitance", "section": "Mesures générales de sécurité"}, {"code": "PIA_SEC_NET", "label": "Sécurisation des canaux informatiques", "section": "Mesures générales de sécurité"}, {"code": "PIA_SEC_PHY", "label": "Sécurité physique", "section": "Mesures générales de sécurité"}, {"code": "PIA_SEC_LOG", "label": "Traçabilité", "section": "Mesures générales de sécurité"}, {"code": "PIA_SEC_MAT", "label": "Sécurisation des matériels", "section": "Mesures générales de sécurité"}, {"code": "PIA_SEC_SRC", "label": "Eloignement des sources de risques", "section": "Mesures générales de sécurité"}, {"code": "PIA_SEC_PROT", "label": "Protection contre les sources de risques non humaines", "section": "Mesures générales de sécurité"}, {"code": "PIA_ORG_ORG", "label": "Organisation de la politique de protection de la vie privée", "section": "Mesures organisationnelles"}, {"code": "PIA_ORG_POL", "label": "Gérer la politique de protection de la vie privée", "section": "Mesures organisationnelles"}, {"code": "PIA_ORG_RMGT", "label": "Gérer les risques", "section": "Mesures organisationnelles"}, {"code": "PIA_ORG_PBD", "label": "Intégrer la protection de la vie privée dans les projets", "section": "Mesures organisationnelles"}, {"code": "PIA_ORG_VIOL", "label": "Gérer les incidents de sécurité et les violations de données", "section": "Mesures organisationnelles"}, {"code": "PIA_ORG_PERS", "label": "Gestion des personnels", "section": "Mesures organisationnelles"}, {"code": "PIA_ORG_EXT", "label": "Gestion des tiers accédant aux données", "section": "Mesures organisationnelles"}, {"code": "PIA_ORG_AUD", "label": "Superviser la protection de la vie privée", "section": "Mesures organisationnelles"}], "measures": [{"id": "RECENSEMENT.1", "label": "Etablir la liste de l'ensemble des services et données à protéger", "pia": "PIA_ORG_RMGT", "note": "L'inventaire des données à protéger est le point de départ de la gestion des risques ; pas de catégorie « inventaire » dans le PIA."}, {"id": "RECENSEMENT.2", "label": "Etablir et tenir à jour la liste des équipements et des applicatifs contribuant au fonctionnement du système d'information", "pia": "PIA_SEC_EXP", "note": "Inventaire des équipements : rattaché à l'exploitation, faute de catégorie dédiée."}, {"id": "RECENSEMENT.3", "label": "Minimiser les données stockées aux seules données nécessaires aux traitements", "pia": "PIA_TEC_MINI", "note": ""}, {"id": "CONFORMITE.1", "label": "Réaliser une analyse de la conformité aux exigences réglementaires et normatives applicables", "pia": "PIA_ORG_AUD", "note": "Analyse de conformité : supervision ou politique ?"}, {"id": "CONFORMITE.3", "label": "Définir et mettre en œuvre en continu un plan d'action de renforcement de la cybersécurité", "pia": "PIA_ORG_POL", "note": ""}, {"id": "PSSI.5", "label": "Vérifier a minima annuellement les politiques et procédures de sécurité et les mettre à jour si nécessaire", "pia": "PIA_ORG_POL", "note": ""}, {"id": "CONTRAT.1", "label": "Identifier ou fixer les engagements des prestataires en matière de sécurité", "pia": "PIA_SEC_CTR", "note": ""}, {"id": "CONTRAT.2", "label": "Contrôler la conformité des prestataires aux exigences de sécurité", "pia": "PIA_SEC_CTR", "note": ""}, {"id": "DEV.1", "label": "Mettre en œuvre des bonnes pratiques de développement sécurisé", "pia": "PIA_ORG_PBD", "note": ""}, {"id": "ECOSYSTEME.1", "label": "Lister les prestataires et fournisseurs avec leurs coordonnées", "pia": "PIA_ORG_EXT", "note": ""}, {"id": "ECOSYSTEME.2", "label": "Lister les interconnexions avec le système d'information et leur point de contact", "pia": "PIA_SEC_NET", "note": "Liste des interconnexions : canaux informatiques ou tiers ?"}, {"id": "ECOSYSTEME.3", "label": "Héberger le système d'information et les données au sein de l'Union européenne", "pia": "PIA_SEC_CTR", "note": "Hébergement dans l'UE : relève aussi de la question 2.2.7 (transferts hors UE)."}, {"id": "ECOSYSTEME.4", "label": "Héberger le système d'information et les données auprès d'un prestataire d'informatique en nuage qualifié SecNumCloud", "pia": "PIA_SEC_CTR", "note": "Hébergement SecNumCloud : rattaché au contrat de sous-traitance."}, {"id": "ECOSYSTEME.5", "label": "Privilégier l'achat d'un nom de domaine en .fr, .eu ou un autre nom de domaine de confiance", "pia": "PIA_SEC_WEB", "note": ""}, {"id": "ECOSYSTEME.6", "label": "Acheter un ou plusieurs noms de domaine proches du nom de domaine du site web", "pia": "PIA_SEC_WEB", "note": ""}, {"id": "RH.2", "label": "Mettre en œuvre un programme de sensibilisation à la sécurité pour l'ensemble des acteurs intervenant sur le système d'information", "pia": "PIA_ORG_PERS", "note": ""}, {"id": "RH.4", "label": "Formaliser et mettre en œuvre un processus de gestion des arrivées, départs et changements de fonction", "pia": "PIA_ORG_PERS", "note": ""}, {"id": "CARTO.2", "label": "Formaliser et tenir à jour le dossier d'architecture du système d'information", "pia": "PIA_SEC_EXP", "note": "Dossier d'architecture : pas de catégorie dédiée dans le PIA."}, {"id": "DONNEES.1", "label": "Chiffrer les données stockées au repos", "pia": "PIA_TEC_CHIF", "note": ""}, {"id": "DONNEES.2", "label": "Anonymiser les données collectées concernant l’utilisation du système d'information par les utilisateurs", "pia": "PIA_TEC_ANO", "note": ""}, {"id": "MCO_MCS.1", "label": "Formaliser et mettre en œuvre une procédure de maintien en conditions opérationnelles et de sécurité des équipements et applicatifs", "pia": "PIA_SEC_MAIN", "note": ""}, {"id": "MCO_MCS.10", "label": "Informer l’utilisateur du canal officiel à utiliser pour le téléchargement de l’application mobile", "pia": "PIA_SEC_WEB", "note": "Canal officiel de l'application mobile : pas de catégorie « mobile » dans le PIA."}, {"id": "MCO_MCS.11", "label": "Effacer les données des équipements avant toute réattribution", "pia": "PIA_SEC_MAT", "note": ""}, {"id": "MCO_MCS.12", "label": "Effacer les données des équipements avant toute mise au rebut", "pia": "PIA_SEC_MAT", "note": ""}, {"id": "MCO_MCS.14", "label": "Mettre à jour systématiquement les postes de travail", "pia": "PIA_SEC_COMP", "note": ""}, {"id": "MCO_MCS.15", "label": "Mettre à jour systématiquement les serveurs et services", "pia": "PIA_SEC_EXP", "note": ""}, {"id": "MCO_MCS.16", "label": "Déployer et tenir à jour un pare-feu permettant de filtrer les communications avec le système d'information", "pia": "PIA_SEC_NET", "note": ""}, {"id": "MCO_MCS.17", "label": "Garantir l'installation sans délai injustifié des correctifs de sécurité sur l'ensemble des équipements et applicatifs", "pia": "PIA_SEC_EXP", "note": ""}, {"id": "MCO_MCS.3", "label": "Réaliser une veille régulière des vulnérabilités, des campagnes de compromission, des correctifs et des mesures d'atténuation", "pia": "PIA_SEC_EXP", "note": ""}, {"id": "MCO_MCS.4", "label": "Garantir l'installation sans délai injustifié des correctifs de sécurité sur les ressources exposées, les annuaires et les postes de travail", "pia": "PIA_SEC_EXP", "note": ""}, {"id": "MCO_MCS.5", "label": "Installer uniquement des applicatifs récents et maintenus à jour par les éditeurs", "pia": "PIA_SEC_EXP", "note": ""}, {"id": "MCO_MCS.6", "label": "Garantir l'installation régulière des mises à jour fonctionnelles et de sécurité", "pia": "PIA_SEC_EXP", "note": ""}, {"id": "MCO_MCS.7", "label": "Télécharger uniquement les mises à jour officielles mises à disposition par les fournisseurs", "pia": "PIA_SEC_EXP", "note": ""}, {"id": "RGPD.1", "label": "Remplir le registre des traitements et le tenir à jour", "pia": "PIA_ORG_POL", "note": "Registre des traitements : politique ou organisation ?"}, {"id": "RGPD.2", "label": "Minimiser la collecte des données à caractère personnel au strict nécessaire", "pia": "PIA_TEC_MINI", "note": ""}, {"id": "RGPD.3", "label": "Limiter la durée de traitement et de conservation des données à caractère personnel au strict nécessaire", "pia": "PIA_TEC_ARCH", "note": "Durées de conservation : déjà traitées en 2.1.5 ; « Archivage » est la catégorie la plus proche."}, {"id": "RGPD.4", "label": "Fournir des informations aux personnes concernées sur l'utilisation de leurs données à caractère personnel.", "pia": "PIA_ORG_POL", "note": "Information des personnes : ce n'est pas une mesure de sécurité, déjà traitée en 2.2.1. À écarter de 3.1 ?"}, {"id": "RGPD.5", "label": "Fournir des informations aux personnes concernées sur les modalités d'exercice des droits.", "pia": "PIA_ORG_POL", "note": "Exercice des droits : ce n'est pas une mesure de sécurité, déjà traité en 2.2.3 à 2.2.6. À écarter de 3.1 ?"}, {"id": "RGPD.6", "label": "Vérifier si une analyse sur la protection des données à caractère personnel doit être réalisée.", "pia": "PIA_ORG_PBD", "note": ""}, {"id": "PHYS.1", "label": "Restreindre l'accès aux locaux aux seules personnes autorisées.", "pia": "PIA_SEC_PHY", "note": ""}, {"id": "PHYS.2", "label": "Mettre en place des mécanismes de protection physique et de contrôle d'accès aux locaux, salles serveur et locaux techniques", "pia": "PIA_SEC_PHY", "note": ""}, {"id": "CLOISON.1", "label": "Cloisonner le système d'information des systèmes non maîtrisés", "pia": "PIA_TEC_CLO", "note": ""}, {"id": "CLOISON.2", "label": "Cloisonner le système d'information des autres systèmes", "pia": "PIA_TEC_CLO", "note": ""}, {"id": "CLOISON.3", "label": "Identifier les éventuels sous-systèmes du système d'information et les cloisonner entre eux", "pia": "PIA_TEC_CLO", "note": ""}, {"id": "CLOISON.4", "label": "Mettre en œuvre des passerelles entrante et sortante entre le système d'information et les systèmes tiers", "pia": "PIA_TEC_CLO", "note": ""}, {"id": "CLOISON.5", "label": "Ouvrir uniquement les interconnexions nécessaires entre le système d'information et les systèmes non maîtrisés", "pia": "PIA_TEC_CLO", "note": ""}, {"id": "CLOISON.6", "label": "Ouvrir uniquement les interconnexions nécessaires entre le système d'information et les autres systèmes", "pia": "PIA_TEC_CLO", "note": ""}, {"id": "FILTRE.1", "label": "Documenter et autoriser uniquement les communications nécessaires via des règles de filtrage entre le système d'information et les systèmes non maîtrisés", "pia": "PIA_SEC_NET", "note": ""}, {"id": "FILTRE.2", "label": "Documenter et autoriser uniquement les communications nécessaires via des règles de filtrage entre le système d'information et les autres systèmes", "pia": "PIA_SEC_NET", "note": ""}, {"id": "FILTRE.3", "label": "Effectuer a minima annuellement une revue de la mise en œuvre technique des règles de filtrage", "pia": "PIA_SEC_NET", "note": ""}, {"id": "FILTRE.4", "label": "Recourir à un service de protection contre les attaques par déni de service", "pia": "PIA_SEC_NET", "note": ""}, {"id": "FILTRE.5", "label": "Installer un parefeu applicatif web (WAF)", "pia": "PIA_SEC_WEB", "note": ""}, {"id": "FILTRE.6", "label": "Filtrer les flux sur les postes de travail", "pia": "PIA_SEC_COMP", "note": ""}, {"id": "FILTRE.7", "label": "Mettre en place un mécanisme de rate-limit", "pia": "PIA_SEC_WEB", "note": "Limitation du débit des requêtes : site web ou canaux informatiques ?"}, {"id": "MAIL.1", "label": "Mettre en œuvre une solution d'anti-spam et d'anti-hameçonnage", "pia": "PIA_SEC_MAL", "note": "Anti-spam et anti-hameçonnage : pas de catégorie « messagerie » dans le PIA."}, {"id": "MAIL.2", "label": "Mettre en œuvre des mécanismes permettant de contrôler l'authenticité des messages électroniques envoyés au nom du domaine du système d'information", "pia": "PIA_SEC_NET", "note": "Authenticité des messages (SPF, DKIM, DMARC) : pas de catégorie « messagerie » dans le PIA."}, {"id": "DISTANCE.1", "label": "Mettre en œuvre un mécanisme de chiffrement pour les accès à distance au système d'information", "pia": "PIA_SEC_NET", "note": ""}, {"id": "DISTANCE.2", "label": "Mettre en place une authentification multifacteur reposant sur au moins un facteur de connaissance pour les accès à distance", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "DISTANCE.3", "label": "Chiffrer les disques des équipements autorisés à accéder au système d'information à distance", "pia": "PIA_TEC_CHIF", "note": ""}, {"id": "DISTANCE.4", "label": "Mettre en œuvre une authentification pour les accès à distance au système d'information par l'entité ou ses prestataires.", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "MALWARE.3", "label": "Analyser l'ensemble des données reçues de sources externes afin d'identifier la présence de codes malveillants", "pia": "PIA_SEC_MAL", "note": ""}, {"id": "MALWARE.4", "label": "Déployer, mettre en œuvre et tenir à jour des moyens de protection des équipements contre les codes malveillants", "pia": "PIA_SEC_MAL", "note": ""}, {"id": "MALWARE.5", "label": "Installer et tenir à jour un antivirus et/ou un EDR sur tous les postes de travail", "pia": "PIA_SEC_MAL", "note": ""}, {"id": "MALWARE.6", "label": "Traiter les alertes générées par les antivirus et/ou les EDR", "pia": "PIA_SEC_MAL", "note": ""}, {"id": "AUTH.1", "label": "Modifier les mots de passe ou autres éléments secrets configurés par défaut dans les équipements et applicatifs", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "AUTH.10", "label": "S'assurer que tous les accès au système d'information sont authentifiés via a minima un secret", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "AUTH.11", "label": "Protéger les mots de passe stockés", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "AUTH.12", "label": "Sauvegarder les mots de passe des acteurs internes travaillant sur le système d'information dans un gestionnaire de mots de passe", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "AUTH.2", "label": "Renouveler les secrets des comptes partagés au départ ou mobilité interne de chaque utilisateur ayant un accès au compte", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "AUTH.3", "label": "Garantir que les secrets des comptes partagés ne sont connus que des utilisateurs autorisés", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "AUTH.4", "label": "S'assurer que les facteurs d'authentification utilisés sont conformes aux recommandations de l'ANSSI", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "AUTH.5", "label": "Fixer des contraintes de complexité des mots de passe ou autres secrets aux comptes administrateurs techniques", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "AUTH.6", "label": "Fixer des contraintes de complexité des mots de passe ou autres secrets aux comptes des processus", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "AUTH.7", "label": "Fixer des contraintes de complexité des mots de passe ou autres secrets aux comptes utilisateurs", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "AUTH.8", "label": "Mettre en place la déconnexion automatique des sessions après une durée déterminée", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "AUTH.9", "label": "Mettre en œuvre des protections contre les tentatives de connexion répétées", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "DROITS.1", "label": "Restreindre les droits d'accès de chaque utilisateur authentifié aux seules ressources nécessaires", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "DROITS.2", "label": "Restreindre les droits d'accès de chaque processus authentifié aux seules ressources nécessaires", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "DROITS.3", "label": "Effectuer une revue des droits d'accès a minima annuellement", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "ID.1", "label": "Autoriser uniquement la création de comptes d’accès individuels utilisables uniquement par l'utilisateur ou processus automatique associé", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "ID.2", "label": "Désactiver les comptes non nécessaires dans un délai formalisé", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "ID.3", "label": "Supprimer à intervalle régulier les comptes des administrateurs techniques inactifs et non nécessaires", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "ID.4", "label": "Effectuer une revue des comptes a minima annuellement", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "ANNUAIRE.1", "label": "Identifier et formaliser la liste des ressources du cœur de confiance", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "ANNUAIRE.2", "label": "Proscrire les connexions à distance aux ressources d'administration du cœur de confiance via un mécanisme de filtrage sur ces ressources", "pia": "PIA_TEC_CTLA", "note": "Filtrage des connexions à distance vers le cœur de confiance : accès logiques ou canaux informatiques ?"}, {"id": "ANNUAIRE.3", "label": "Effectuer a minima annuellement une revue de la configuration des annuaires", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "ANNUAIRE.5", "label": "Dédier les ressources et comptes d'administration du cœur de confiance à cet usage", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "COMPADMIN.1", "label": "N'autoriser les actions d'administration qu'avec des comptes d'administration", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "COMPADMIN.2", "label": "Restreindre les comptes d'administration aux seules personnes autorisées à administrer", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "COMPADMIN.3", "label": "Restreindre le périmètre des comptes d'administration", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "COMPADMIN.4", "label": "Formaliser et tenir à jour en continu une liste des comptes d'administration", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "COMPADMIN.5", "label": "Garantir une revue des droits d'accès à chaque modification d'un compte d'administration", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "COMPADMIN.6", "label": "Limiter les droits de chaque administrateur du système d'information au strict nécessaire", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "COMPADMIN.7", "label": "Limiter drastiquement le nombre d'utilisateurs pouvant administrer localement leur poste de travail", "pia": "PIA_SEC_COMP", "note": ""}, {"id": "COMPADMIN.9", "label": "Limiter au strict nécessaire le nombre de personnes disposant d’un accès administrateur", "pia": "PIA_TEC_CTLA", "note": ""}, {"id": "INCIDENT.1", "label": "Formaliser et mettre en œuvre une procédure de traitement des incidents de sécurité", "pia": "PIA_ORG_VIOL", "note": ""}, {"id": "INCIDENT.2", "label": "Mettre en œuvre des outils permettant la collecte de signalements d'évènements de sécurité, notamment par les utilisateurs et les prestataires ou fournisseurs", "pia": "PIA_ORG_VIOL", "note": ""}, {"id": "INCIDENT.3", "label": "Mettre en œuvre des mécanismes permettant d’analyser et de qualifier les événements de sécurité ainsi que d'identifier d'éventuels incidents", "pia": "PIA_ORG_VIOL", "note": ""}, {"id": "INCIDENT.4", "label": "Garantir que les causes de chaque incident majeur sont analysées et donnent lieu à un plan d'action", "pia": "PIA_ORG_VIOL", "note": ""}, {"id": "INCIDENT.6", "label": "Rendre publics un point de contact et des modalités de communication de tout problème de sécurité", "pia": "PIA_ORG_VIOL", "note": ""}, {"id": "INCIDENT.7", "label": "Lister les personnes à contacter en cas d'incident de sécurité informatique", "pia": "PIA_ORG_VIOL", "note": ""}, {"id": "INCIDENT.8", "label": "Mettre en œuvre des mécanismes permettant de réagir aux incidents et d'en limiter les conséquences", "pia": "PIA_ORG_VIOL", "note": ""}, {"id": "CONTINU.1", "label": "Formaliser et mettre en œuvre des procédures de sauvegarde et de restauration, et les tester a minima annuellement.", "pia": "PIA_SEC_BKP", "note": ""}, {"id": "CONTINU.2", "label": "Protéger les sauvegardes d'un évènement les rendant inexploitables", "pia": "PIA_SEC_BKP", "note": ""}, {"id": "CONTINU.3", "label": "Formaliser la durée d'interruption et la perte de données maximales admissibles du système d'information", "pia": "PIA_SEC_BKP", "note": "Durée d'interruption admissible : pas de catégorie « continuité d'activité » dans le PIA."}, {"id": "CONTINU.5", "label": "Formaliser et mettre en œuvre le plan de reprise de l'activité", "pia": "PIA_SEC_BKP", "note": "Plan de reprise : pas de catégorie « continuité d'activité » dans le PIA."}, {"id": "CONTINU.6", "label": "Recourir à une ou plusieurs solutions garantissant un haut niveau de disponibilité du système d'information", "pia": "PIA_SEC_EXP", "note": "Haute disponibilité : pas de catégorie « continuité d'activité » dans le PIA."}, {"id": "RISQUE.1", "label": "Réaliser une analyse de risque approfondie de la sécurité du système d'information et la mettre à jour au minimum tous les trois ans", "pia": "PIA_ORG_RMGT", "note": ""}, {"id": "RISQUE.2", "label": "Réaliser une analyse de risque rapide de la sécurité du système d'information", "pia": "PIA_ORG_RMGT", "note": ""}, {"id": "AUDIT.1", "label": "Formaliser et mettre en œuvre un programme d'audit du système d'information", "pia": "PIA_ORG_AUD", "note": ""}, {"id": "AUDIT.2", "label": "Intégrer, si nécessaire, au programme d'audit un audit de code", "pia": "PIA_ORG_AUD", "note": ""}, {"id": "AUDIT.3", "label": "Intégrer au programme d'audit un test d’intrusion", "pia": "PIA_ORG_AUD", "note": ""}, {"id": "AUDIT.4", "label": "Intégrer au programme d'audit un audit de configuration", "pia": "PIA_ORG_AUD", "note": ""}, {"id": "AUDIT.5", "label": "Intégrer au programme d'audit un audit d'architecture", "pia": "PIA_ORG_AUD", "note": ""}, {"id": "AUDIT.6", "label": "Mettre en œuvre des mécanismes d'audit automatique du code", "pia": "PIA_ORG_PBD", "note": "Audit automatique du code : intégration dans les projets ou supervision ?"}, {"id": "AUDIT.7", "label": "Réaliser un audit de sécurité sur le système d'information", "pia": "PIA_ORG_AUD", "note": ""}, {"id": "CONFIG.1", "label": "Installer et conserver uniquement les applicatifs et fonctionnalités nécessaires", "pia": "PIA_SEC_EXP", "note": ""}, {"id": "CONFIG.2", "label": "Configurer les équipements et applicatifs en s'appuyant sur les recommandations disponibles", "pia": "PIA_SEC_EXP", "note": ""}, {"id": "CONFIG.3", "label": "Procéder a minima annuellement à une revue de configuration des équipements et applicatifs", "pia": "PIA_SEC_EXP", "note": ""}, {"id": "CONFIG.4", "label": "Installer un certificat de sécurité conforme au référentiel général de sécurité", "pia": "PIA_SEC_WEB", "note": ""}, {"id": "CONFIG.5", "label": "Désactiver tout flux de données non chiffré", "pia": "PIA_SEC_NET", "note": ""}, {"id": "CONFIG.6", "label": "Fermer tous les ports non strictement nécessaires", "pia": "PIA_SEC_EXP", "note": ""}, {"id": "CONFIG.7", "label": "Installer un certificat de signature électronique conforme à la réglementation", "pia": "PIA_TEC_CHIF", "note": "Certificat de signature électronique : rattaché au chiffrement, faute de catégorie « signature »."}, {"id": "CONFIG.8", "label": "Désactiver, sauf dérogation tracée, les ports usb des serveurs", "pia": "PIA_SEC_MAT", "note": ""}, {"id": "ADMIN.1", "label": "Réaliser les actions d'administration technique depuis un réseau dédié", "pia": "PIA_SEC_EXP", "note": "Administration technique : rattachée à l'exploitation ; « Cloisonnement » est l'autre choix possible."}, {"id": "ADMIN.2", "label": "S'assurer que les ressources des réseaux d'administration technique sont gérés et configurés par les personnes désignées", "pia": "PIA_SEC_EXP", "note": "Administration technique : rattachée à l'exploitation ; « Cloisonnement » est l'autre choix possible."}, {"id": "ADMIN.3", "label": "Dédier les ressources matérielles des réseaux d'administration technique aux actions d'administration", "pia": "PIA_SEC_EXP", "note": "Administration technique : rattachée à l'exploitation ; « Cloisonnement » est l'autre choix possible."}, {"id": "ADMIN.4", "label": "Utiliser des postes physiques dédiés pour la connexion et actions d'administration", "pia": "PIA_SEC_EXP", "note": "Administration technique : rattachée à l'exploitation ; « Cloisonnement » est l'autre choix possible."}, {"id": "ADMIN.5", "label": "Administrer les ressources du système d'information au travers d'une liaison réseau et d'une interface physiques dédiées", "pia": "PIA_SEC_EXP", "note": "Administration technique : rattachée à l'exploitation ; « Cloisonnement » est l'autre choix possible."}, {"id": "ADMIN.6", "label": "Cloisonner et filtrer les accès d'administration technique", "pia": "PIA_TEC_CLO", "note": ""}, {"id": "ADMIN.7", "label": "Chiffrer et authentifier les communications associées aux actions d'administration technique", "pia": "PIA_SEC_NET", "note": ""}, {"id": "SUPERVISION.4", "label": "Conserver et centraliser les journaux et évènements de sécurité utiles à la détection des principaux scénarios de menaces", "pia": "PIA_SEC_LOG", "note": "Le PIA distingue « Journalisation » (mesure sur les données) et « Traçabilité » (mesure générale) : laquelle retenir ?"}, {"id": "SUPERVISION.5", "label": "Stocker les journaux et évènements de sécurité pour une durée minimum de trois mois", "pia": "PIA_SEC_LOG", "note": "Le PIA distingue « Journalisation » (mesure sur les données) et « Traçabilité » (mesure générale) : laquelle retenir ?"}, {"id": "SUPERVISION.6", "label": "Conserver et centraliser le journal des accès des administrateurs technique", "pia": "PIA_SEC_LOG", "note": "Le PIA distingue « Journalisation » (mesure sur les données) et « Traçabilité » (mesure générale) : laquelle retenir ?"}, {"id": "SUPERVISION.7", "label": "Conserver et centraliser le journal des évènements de sécurité intervenus sur le système d'information", "pia": "PIA_SEC_LOG", "note": "Le PIA distingue « Journalisation » (mesure sur les données) et « Traçabilité » (mesure générale) : laquelle retenir ?"}], "questions": [{"id": "q1", "title": "Mesures qui relèvent du RGPD plutôt que de la sécurité", "text": "MonServiceSécurisé contient des mesures sur l'information des personnes (RGPD.4), l'exercice des droits (RGPD.5) et les durées de conservation (RGPD.3). Ces sujets sont déjà traités dans la section 2 du PIA. Faut-il les reporter aussi en 3.1, ou les écarter ?"}, {"id": "q2", "title": "Catégories très chargées", "text": "« Contrôle des accès logiques » reçoit 32 mesures et « Sécurisation de l'exploitation » 19. Une fiche de mesure aussi longue reste-t-elle lisible dans le PIA, ou faut-il la découper en sous-ensembles (authentification, droits, comptes d'administration) ?"}, {"id": "q3", "title": "Continuité d'activité", "text": "Le PIA n'a pas de catégorie pour le plan de reprise, la durée d'interruption admissible ou la haute disponibilité (CONTINU.3, 5 et 6). Elles sont rattachées à « Sauvegarde des données » ou à « Sécurisation de l'exploitation ». Ce choix convient-il ?"}, {"id": "q4", "title": "Journalisation ou traçabilité", "text": "Le PIA distingue « Journalisation » (mesure portant sur les données) et « Traçabilité » (mesure générale de sécurité). Les quatre mesures de MonServiceSécurisé sur les journaux sont rangées dans « Traçabilité ». Laquelle des deux catégories faut-il retenir ?"}, {"id": "q5", "title": "Catégories du PIA sans mesure correspondante", "text": "5 catégories ne reçoivent aucune mesure de MonServiceSécurisé : Journalisation, Sécurisation des documents papier, Eloignement des sources de risques, Protection contre les sources de risques non humaines, Organisation de la politique de protection de la vie privée. Le porteur de projet doit-il les renseigner lui-même, et faut-il le lui rappeler dans le parcours ?"}, {"id": "q6", "title": "États possibles d'une mesure", "text": "La section 3.1 s'intitule « Mesures existantes ou prévues ». Deux états suffisent-ils (mise en œuvre, non mise en œuvre), ou faut-il aussi « prévue » et « sans objet » ? Une mesure non mise en œuvre doit-elle être accompagnée d'une justification ?"}, {"id": "q7", "title": "Validation de la table", "text": "Les rattachements signalés « à confirmer » portent surtout sur des choix techniques (administration, messagerie, interconnexions). Le RSSI doit-il les valider avec vous, ou votre visa suffit-il pour cette première version ?"}]}</script>
+<script>
+(function () {
+  var DATA = JSON.parse(document.getElementById('data').textContent);
+  var DROP = '__drop';
+  var catLabel = {}; DATA.cats.forEach(function (c) { catLabel[c.code] = c.label; });
+  var S = { reviews: {}, answers: {}, filter: 'all', q: '', canWrite: false, me: null, names: {} };
+  var db = null, user = null, dirty = {}, timers = {}, queues = {};
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  // ---------- état d'une mesure
+  function effective(m) { var r = S.reviews[m.id]; return r && r.pia ? r.pia : m.pia; }
+  function stateOf(m) {
+    var r = S.reviews[m.id]; if (!r) return '';
+    if (r.pia === DROP) return 'drop';
+    if (r.pia && r.pia !== m.pia) return 'moved';
+    return r.ok ? 'ok' : '';
+  }
+  function who(doc) {
+    if (!doc || !doc.at) return '';
+    var d = new Date(doc.at), t = isNaN(d) ? '' : d.toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+    var n = doc.by ? (doc.by === S.me ? 'vous' : (S.names[doc.by] || 'une autre personne')) : '';
+    return 'Enregistré' + (n ? ' par ' + n : '') + (t ? ', ' + t : '');
+  }
+
+  // ---------- écriture (une à la fois par document)
+  function setSync(state, text) { var s = $('sync'); s.dataset.state = state; s.textContent = text; }
+  function write(path, body) {
+    if (!db) return;
+    setSync('load', 'Enregistrement…');
+    var prev = queues[path] || Promise.resolve();
+    queues[path] = prev.catch(function () {}).then(function () { return db.doc(path).set(body); }).then(function () {
+      setSync('ok', 'Saisies enregistrées');
+    }, function (e) {
+      if (e && e.code === 'invalid_argument') { S.canWrite = false; lock("Vous pouvez lire cette page, mais pas y enregistrer de saisie. Demandez un accès « Contributeur » à son propriétaire."); }
+      else if (e && e.code === 'unavailable') { setSync('err', "Enregistrement impossible pour l'instant : modifiez à nouveau le champ pour réessayer."); }
+      else setSync('err', "L'enregistrement a échoué. Rechargez la page pour vérifier ce qui a été conservé.");
+    });
+  }
+  function stamp(o) { o.at = new Date().toISOString(); if (S.me) o.by = S.me; return o; }
+  function saveReview(m, patch) {
+    var old = S.reviews[m.id] || {};
+    var r = stamp({ pia: old.pia || m.pia, ok: !!old.ok, comment: old.comment || '' });
+    Object.keys(patch).forEach(function (k) { r[k] = patch[k]; });
+    S.reviews[m.id] = r; refresh(); write('reviews/' + m.id, r);
+  }
+  function saveAnswer(q, text) {
+    var a = stamp({ text: text }); S.answers[q.id] = a; refresh(); write('answers/' + q.id, a);
+  }
+  function debounce(key, fn) { clearTimeout(timers[key]); timers[key] = setTimeout(fn, 1500); }
+  function flush(key, fn) { if (timers[key]) { clearTimeout(timers[key]); timers[key] = null; fn(); } }
+
+  // ---------- questions
+  var qEls = {};
+  DATA.questions.forEach(function (q, i) {
+    var box = el('div', 'q');
+    box.appendChild(el('h3', '', (i + 1) + '. ' + q.title));
+    box.appendChild(el('p', '', q.text));
+    var ta = el('textarea'); ta.id = 'answer-' + q.id; ta.placeholder = 'Votre réponse'; ta.setAttribute('aria-label', 'Réponse à la question ' + (i + 1)); ta.disabled = true;
+    var meta = el('p', 'meta');
+    var commit = function () { dirty[ta.id] = false; if ((S.answers[q.id] ? S.answers[q.id].text : '') !== ta.value) saveAnswer(q, ta.value); };
+    ta.addEventListener('input', function () { dirty[ta.id] = true; debounce(ta.id, commit); });
+    ta.addEventListener('blur', function () { flush(ta.id, commit); });
+    box.appendChild(ta); box.appendChild(meta); $('questions').appendChild(box);
+    qEls[q.id] = { box: box, ta: ta, meta: meta };
+  });
+
+  // ---------- table
+  var groups = {}, rows = {}, families = [];
+  function addGroup(parent, code, label) {
+    var g = el('div', 'cat'), head = el('div', 'cat-head'), count = el('span');
+    head.appendChild(el('h3', '', label)); head.appendChild(count);
+    var list = el('div', 'rows'); g.appendChild(head); g.appendChild(list); parent.appendChild(g);
+    groups[code] = { box: g, list: list, count: count };
+  }
+  var sections = []; DATA.cats.forEach(function (c) { if (sections.indexOf(c.section) < 0) sections.push(c.section); });
+  sections.forEach(function (s) {
+    var f = el('div', 'family'); f.appendChild(el('h3', '', s));
+    DATA.cats.filter(function (c) { return c.section === s; }).forEach(function (c) { addGroup(f, c.code, c.label); });
+    $('table').appendChild(f); families.push(f);
+  });
+  var fd = el('div', 'family'); fd.appendChild(el('h3', '', 'Hors section 3.1')); addGroup(fd, DROP, 'Mesures écartées du PIA'); $('table').appendChild(fd); families.push(fd);
+
+  DATA.measures.forEach(function (m) {
+    var row = el('article', 'm'), main = el('div', 'm-main'), ctl = el('div', 'm-ctl');
+    main.appendChild(el('span', 'ref', m.id)); main.appendChild(el('p', '', m.label));
+    if (m.note) main.appendChild(el('p', 'note', m.note));
+    var from = el('p', 'moved-from'); from.hidden = true; main.appendChild(from);
+    var sel = el('select'); sel.id = 'cat-' + m.id; sel.setAttribute('aria-label', 'Catégorie du PIA pour ' + m.id);
+    sections.forEach(function (s) {
+      var og = document.createElement('optgroup'); og.label = s;
+      DATA.cats.filter(function (c) { return c.section === s; }).forEach(function (c) { var o = el('option', '', c.label); o.value = c.code; og.appendChild(o); });
+      sel.appendChild(og);
+    });
+    var od = el('option', '', 'Écarter du PIA (hors 3.1)'); od.value = DROP; sel.appendChild(od);
+    sel.addEventListener('change', function () { saveReview(m, { pia: sel.value, ok: true }); });
+    var ok = el('button', 'okbtn', 'Valider'); ok.type = 'button'; ok.setAttribute('aria-pressed', 'false');
+    ok.addEventListener('click', function () { var r = S.reviews[m.id]; saveReview(m, { ok: !(r && r.ok) }); });
+    var com = el('input'); com.id = 'com-' + m.id; com.type = 'text'; com.placeholder = 'Commentaire'; com.setAttribute('aria-label', 'Commentaire sur ' + m.id);
+    var commit = function () { dirty[com.id] = false; var r = S.reviews[m.id]; if ((r ? r.comment || '' : '') !== com.value) saveReview(m, { comment: com.value }); };
+    com.addEventListener('input', function () { dirty[com.id] = true; debounce(com.id, commit); });
+    com.addEventListener('blur', function () { flush(com.id, commit); });
+    var line = el('div', 'line'); line.appendChild(sel); line.appendChild(ok);
+    var meta = el('p', 'meta');
+    ctl.appendChild(line); ctl.appendChild(com); ctl.appendChild(meta);
+    row.appendChild(main); row.appendChild(ctl);
+    [sel, ok, com].forEach(function (c) { c.disabled = true; });
+    rows[m.id] = { row: row, sel: sel, ok: ok, com: com, meta: meta, from: from, hay: (m.id + ' ' + m.label).toLowerCase() };
+  });
+
+  var FILTERS = [
+    ['all', 'Toutes', function () { return true; }],
+    ['todo', 'À relire', function (m) { return !stateOf(m); }],
+    ['doubt', 'À confirmer', function (m) { return !!m.note; }],
+    ['changed', 'Modifiées', function (m) { var s = stateOf(m); return s === 'moved' || s === 'drop'; }],
+    ['com', 'Commentées', function (m) { var r = S.reviews[m.id]; return !!(r && r.comment); }]
+  ];
+  var chipEls = {};
+  FILTERS.forEach(function (f) {
+    var b = el('button', 'chip'); b.type = 'button'; b.id = 'filter-' + f[0];
+    b.addEventListener('click', function () { S.filter = f[0]; try { localStorage.setItem('filter', f[0]); } catch (e) {} refresh(); });
+    $('chips').appendChild(b); chipEls[f[0]] = b;
+  });
+  try { var sf = localStorage.getItem('filter'); if (sf && chipEls[sf]) S.filter = sf; } catch (e) {}
+  $('search').addEventListener('input', function () { S.q = this.value.trim().toLowerCase(); refresh(); });
+
+  // ---------- rendu (les lignes sont créées une fois, puis déplacées et mises à jour)
+  function refresh() {
+    var test = FILTERS.filter(function (f) { return f[0] === S.filter; })[0][2];
+    var shown = 0, reviewed = 0, per = {}, perDone = {};
+    FILTERS.forEach(function (f) { chipEls[f[0]].textContent = f[1] + ' ' + DATA.measures.filter(f[2]).length; chipEls[f[0]].setAttribute('aria-pressed', String(f[0] === S.filter)); });
+    DATA.measures.forEach(function (m) {
+      var R = rows[m.id], r = S.reviews[m.id], code = effective(m), st = stateOf(m);
+      if (!groups[code]) code = m.pia;
+      if (R.row.parentNode !== groups[code].list) groups[code].list.appendChild(R.row);
+      R.row.dataset.state = st;
+      if (document.activeElement !== R.sel) R.sel.value = code;
+      R.ok.setAttribute('aria-pressed', String(!!st));
+      R.ok.textContent = st === 'ok' ? 'Validée' : (st ? 'Relue' : 'Valider');
+      R.ok.disabled = !S.canWrite || st === 'moved' || st === 'drop';
+      R.sel.disabled = R.com.disabled = !S.canWrite;
+      if (!dirty[R.com.id] && document.activeElement !== R.com) R.com.value = r && r.comment ? r.comment : '';
+      R.from.hidden = !(st === 'moved' || st === 'drop');
+      if (!R.from.hidden) R.from.textContent = 'Proposition initiale : ' + catLabel[m.pia];
+      R.meta.textContent = who(r);
+      var vis = test(m) && (!S.q || R.hay.indexOf(S.q) >= 0);
+      R.row.hidden = !vis; if (vis) shown++;
+      per[code] = (per[code] || 0) + 1; if (st) { reviewed++; perDone[code] = (perDone[code] || 0) + 1; }
+    });
+    var filtered = S.filter !== 'all' || !!S.q;
+    Object.keys(groups).forEach(function (code) {
+      var g = groups[code], n = per[code] || 0, visible = 0;
+      Array.prototype.forEach.call(g.list.children, function (c) { if (!c.hidden) visible++; });
+      g.count.textContent = n ? n + (n > 1 ? ' mesures' : ' mesure') + ', ' + (perDone[code] || 0) + (perDone[code] > 1 ? ' relues' : ' relue') : 'aucune mesure';
+      g.box.hidden = filtered ? !visible : (code === DROP && !n);
+    });
+    families.forEach(function (f) { var any = false; Array.prototype.forEach.call(f.querySelectorAll('.cat'), function (c) { if (!c.hidden) any = true; }); f.hidden = !any; });
+    $('none').hidden = shown > 0;
+
+    var answered = 0;
+    DATA.questions.forEach(function (q) {
+      var Q = qEls[q.id], a = S.answers[q.id], has = !!(a && a.text && a.text.trim());
+      if (has) answered++;
+      Q.box.dataset.answered = has ? '1' : '0';
+      Q.ta.disabled = !S.canWrite;
+      if (!dirty[Q.ta.id] && document.activeElement !== Q.ta) Q.ta.value = a && a.text ? a.text : '';
+      Q.meta.textContent = who(a);
+    });
+    $('n-answers').textContent = answered; $('t-answers').textContent = DATA.questions.length;
+    $('n-reviewed').textContent = reviewed; $('t-measures').textContent = DATA.measures.length;
+    $('bar-answers').style.width = (100 * answered / DATA.questions.length) + '%';
+    $('bar-reviewed').style.width = (100 * reviewed / DATA.measures.length) + '%';
+    resolveNames();
+  }
+  var resolving = false;
+  function resolveNames() {
+    if (!user || resolving) return;
+    var ids = {};
+    [S.reviews, S.answers].forEach(function (c) { Object.keys(c).forEach(function (k) { var b = c[k].by; if (b && b !== S.me && !(b in S.names)) ids[b] = 1; }); });
+    ids = Object.keys(ids); if (!ids.length) return;
+    resolving = true;
+    user.profiles(ids).then(function (ps) {
+      ids.forEach(function (id) { S.names[id] = (ps[id] && ps[id].name) || ''; });
+      resolving = false; refresh();
+    }, function () { resolving = false; });
+  }
+  function lock(text) { var b = $('banner'); b.textContent = text; b.hidden = false; setSync('err', 'Lecture seule'); refresh(); }
+
+  refresh();
+
+  // ---------- branchement sur le stockage partagé
+  function start() {
+    if (!window.claude || !window.claude.use) { lock("Cette vue n'est pas reliée au stockage partagé : les saisies ne seraient pas enregistrées."); return; }
+    Promise.all([window.claude.use('db'), window.claude.use('user')]).then(function (res) {
+      db = res[0]; user = res[1];
+      if (!db) { lock("Connectez-vous à claude.ai pour enregistrer vos réponses : dans cette vue, la page est en lecture seule."); return; }
+      var pending = 2, late = setTimeout(function () { setSync('err', "Les saisies déjà enregistrées ne sont pas encore accessibles ; elles s'afficheront dès que possible."); }, 10000);
+      var got = function (meta) { if (!meta.fromCache && pending > 0 && --pending === 0) { clearTimeout(late); setSync('ok', 'Saisies à jour'); } };
+      var fail = function () { clearTimeout(late); lock("Les saisies partagées ne sont plus accessibles dans cette vue. Rechargez la page."); };
+      var idP = user ? Promise.all([user.id(), user.can('data.write')]) : Promise.resolve([null, null]);
+      idP.then(function (r) {
+        S.me = r[0]; S.canWrite = r[1] !== false;
+        if (r[1] === false) lock("Vous pouvez lire cette page, mais pas y enregistrer de saisie. Demandez un accès « Contributeur » à son propriétaire.");
+        db.collection('reviews').onSnapshot(function (snap) {
+          var next = {}; snap.docs.forEach(function (d) { next[d.id] = d.data(); }); S.reviews = next; got(snap.metadata); refresh();
+        }, fail);
+        db.collection('answers').onSnapshot(function (snap) {
+          var next = {}; snap.docs.forEach(function (d) { next[d.id] = d.data(); }); S.answers = next; got(snap.metadata); refresh();
+        }, fail);
+        refresh();
+      });
+    });
+  }
+  start();
+})();
+</script>
