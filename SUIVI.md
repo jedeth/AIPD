@@ -13,14 +13,14 @@ axe_faisabilite: 14
 axe_economie: 10
 date_debut: 2026-11-17
 date_fin_prevue: 2027-02-01
-derniere_action: 2026-11-17
-prochaine_action: Séance DPO : démo du parcours guidé, visa des listes d'informations et des correspondances avec MonServiceSécurisé
-responsable: Jérôme de Thésut
-echeance: 2026-11-20
+derniere_action: 2026-11-26
+prochaine_action: Relecture par le DPO de la table de correspondance des mesures et réponses aux sept questions ; puis intégration au parcours
+responsable: Bartholomé Gillery
+echeance:
 blocage: 
-decision_attendue: Validation par le DPO des questions et du parcours ; forme du déploiement (académie ou mutualisé)
+decision_attendue: Validation par le DPO et le RSSI de la table de correspondance des mesures ; visa des listes du parcours ; forme du déploiement (académie ou mutualisé)
 charge_estimee: 
-charge_consommee: 1
+charge_consommee: 2
 ---
 
 ## Objectif
@@ -39,6 +39,7 @@ Aider les agents non spécialistes à réaliser une analyse d'impact (AIPD) avec
 - Scoring : portefeuille, 024-assistant-pia/SCORING.md
 - Carnet de bord : docs/carnet-de-bord.md
 - Note de cadrage PIA + MonServiceSécurisé, questions élémentaires, matrice de dépendances : documents Claude partagés avec le DPO
+- Table de correspondance des mesures MonServiceSécurisé et PIA (premier jet) : env/review, et page de relecture en ligne partagée avec le DPO
 
 ## Points de vigilance
 
@@ -49,6 +50,11 @@ Aider les agents non spécialistes à réaliser une analyse d'impact (AIPD) avec
 
 ## Journal
 
+- 2026-11-26 · livrable · Premier jet de la table de correspondance entre les 135 mesures de MonServiceSécurisé et les 29 catégories de mesures du PIA, remis au DPO avec sept questions (PDF et page de relecture en ligne).
+- 2026-11-26 · code · Le pré-remplissage du PIA reporte aussi les mesures de MonServiceSécurisé en section 3.1 ; MonServiceSécurisé s'ouvre depuis le parcours sans nouvelle authentification (instance locale).
+- 2026-11-26 · décision · Séance DPO : les mesures de MonServiceSécurisé seront rangées dans les catégories de mesures du PIA ; le porteur de projet indiquera dans le parcours si chaque mesure est mise en œuvre.
+- 2026-11-26 · réunion · Séance avec le DPO : démonstration du parcours guidé sur un cas de test. Demandes : estimation chiffrée du nombre de personnes concernées, détail des données par catégorie, meilleure correspondance des mesures de sécurité avec celles du PIA.
+- 2026-11-20 · code · Délais d'attente allongés après un ralentissement d'Albert qui interrompait l'analyse.
 - 2026-11-17 · code · Premier export PDF d'une analyse de test : les brouillons se répétaient à chaque report. Corrigé : report rejouable sans doublon et texte de l'agent conservé, brouillon seulement si l'information principale de la question est connue, chaque risque MonServiceSécurisé rattaché à un seul risque du PIA. Analyse de test nettoyée.
 - 2026-11-17 · livrable · Parcours rendu linéaire : le pré-remplissage du PIA se fait à la fin, à l'étape Valider.
 - 2026-11-17 · livrable · Étape Valider du parcours : bilan des questions remplies, report des mesures indispensables de MonServiceSécurisé dans le PIA (une fiche par catégorie), liens vers l'avis du DPO, la validation du PIA et l'homologation.
