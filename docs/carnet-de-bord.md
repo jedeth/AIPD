@@ -1,6 +1,6 @@
 # Carnet de bord — PIA académie + assistant IA
 
-> Dernière mise à jour : **2026-11-26** (avant la séance DPO).
+> Dernière mise à jour : **2026-11-26** (pause, après la séance DPO).
 > Tenu à jour par la skill `aipd-reprise` à chaque pause et à chaque reprise.
 > **Aucun secret ici** : ce fichier est versionné (dépôt `jedeth/AIPD`). Les secrets sont dans `env/server/.env` et `env/server/admin.secret` (droits 600).
 
@@ -15,20 +15,20 @@
 | Application (mode serveur) | http://localhost:8080 — après un déploiement, **Ctrl+Maj+R** (service worker) |
 | Paramètres du front | Menu Paramètres → URL `http://localhost:8080/api`, Client ID / Client Secret : voir `env/server/admin.secret` |
 | Compte admin | email `admin@pia.local`, mot de passe dans `env/server/admin.secret` |
-| MonServiceSécurisé (local) | http://localhost:8090 (tunnel `-L 8090:127.0.0.1:8090`), « Se connecter » → formulaire local (e-mail, sans mot de passe). Compte `admin@pia.local` créé le 2026-11-17 (rectorat de Paris, téléphone fictif). Doc : `env/mss/README.md` |
+| MonServiceSécurisé (local) | http://localhost:8090 (tunnel `-L 8090:127.0.0.1:8090`), « Se connecter » → formulaire local (e-mail, sans mot de passe) ; depuis le parcours guidé, les liens ouvrent MSS déjà connecté (`MSS_DIRECT_LOGIN=true` dans `env/server/.env`). Compte `admin@pia.local` créé le 2026-11-17 (rectorat de Paris, téléphone fictif). Doc : `env/mss/README.md` |
 | Front de dev (ng serve) | http://localhost:4200 — mode local par défaut, à basculer en mode serveur comme ci-dessus |
 | PIA de démonstration | n° 8 « Cantine - badges élèves (essai prefill) » (contient des incohérences volontaires) |
 
-## 2. État actuel (constaté le 2026-11-26)
+## 2. État actuel (constaté le 2026-11-26, à la pause)
 
-- Conteneurs `pia-front` (8080), `pia-back`, `pia-db`, `pia-dev` (4200), `mss-web` (127.0.0.1:8090) et `mss-db` : tous **Up**. Le front répond 200, `/api/assistant/status` 401 sans jeton (attendu). Aucune erreur 5xx sur 72 h. 33 appels assistant tracés (dernier le 2026-11-17).
-- Branche déployée : **`feature/guided`** sur `pia` (`1e8af230`) et `pia-back` (`617af92`) : parcours guidé complet, étapes 1 à 5. Commits **locaux uniquement** : `origin` = LINCnil, on n'y pousse pas (dépôts privés `jedeth/pia` et `jedeth/pia-back` à créer).
-- MonServiceSécurisé : branche `local/connexion-dev` (`a881e9562`, passerelle `/integration/pia`, secret partagé dans les deux `.env`). `pia-back` est relié au réseau `mss_default`. 1 compte (`admin@pia.local`) et 1 service (créé depuis la PIA n° 10). Ne jamais exposer au-delà de 127.0.0.1.
-- PIA n° 10 « test_parcours_assiste » : parcours de test complet ; brouillons nettoyés (un seul par question) après l'analyse du premier export PDF.
-- LLM : Albert API, `gpt-oss-120b` par défaut ; la déduction du parcours fait deux appels en parallèle et une recherche dans les collections Légifrance et décisions CNIL d'Albert. Le 2026-11-20, Albert débitait 13 tokens/s (contre ~55 le 17/11) : délais portés à 240 s (`LLM_TIMEOUT`) et 300 s (nginx, `env/server/nginx.conf.template`, commité dans `57600d2`). Une analyse peut prendre 2-3 min : la lancer avant la démo.
-- Démo DPO : déroulé dans Claude Docs (https://claude.ai/artifact/2jTNMqMf4sdAj2ReXtqpJ6). PIA n° 10 = parcours complet avec service MSS ; PIA n° 11 « Démo infirmerie » : parcours vierge, à lancer en direct (essai du 2026-11-26 : 26 propositions en 54 s, Albert à 34 tokens/s ; profil d'essai supprimé ensuite).
-- Code : rien de non commité dans `pia`, `pia-back`, `mon-service-securise`. Dans `~/AIPD`, les pointeurs `pia` et `pia-back` ne sont pas mis à jour, volontairement.
-- Incubateur : demande Grist n° 24 (assistant PIA) scorée 65/100, fiche `SUIVI.md` poussée dans le Grist ; le même jour, scoring et suivi des demandes n° 11 (assistant de langues, portefeuille) et n° 25 (Établi, dépôt Établi).
+- Conteneurs `pia-front` (8080), `pia-back`, `pia-db`, `pia-dev` (4200), `mss-web` (127.0.0.1:8090) et `mss-db` : tous **Up** (`pia-back`, `pia-front` et `mss-web` reconstruits le 2026-11-26). Le front répond 200, `/api/assistant/status` 401 sans jeton (attendu), MSS 302 vers la connexion. Aucune erreur 5xx sur 24 h. 35 appels assistant tracés (dernier le 2026-11-26).
+- Branche déployée : **`feature/guided`** sur `pia` (`97d9f2e6`) et `pia-back` (`d09fd1b`) : parcours guidé complet, mesures MSS reportées en 3.1 au pré-remplissage, liens directs vers MSS. Commits **locaux uniquement** : `origin` = LINCnil, on n'y pousse pas (dépôts privés `jedeth/pia` et `jedeth/pia-back` à créer).
+- MonServiceSécurisé : branche `local/connexion-dev` (`cafcf2be4` : passerelle `/integration/pia` et connexion directe `/oidc/connexion-directe` ; commité sans le contrôle Prettier d'avant-commit). `pia-back` est relié au réseau `mss_default`. 1 compte (`admin@pia.local`), 2 services (PIA n° 10 et n° 11). Ne jamais exposer au-delà de 127.0.0.1.
+- PIA n° 10 « test_parcours_assiste » : parcours de test complet. PIA n° 11 « démo infirmerie » : test fait en séance le 2026-11-26 (cantine, empreinte palmaire), 19 questions pré-remplies, service MSS créé, mesures MSS pas encore importées en 3.1.
+- LLM : Albert API, `gpt-oss-120b` par défaut ; délais de 240 s (`LLM_TIMEOUT`) et 300 s (nginx). Le 2026-11-26 : 34 tokens/s, déduction en 50 s environ (13 tokens/s le 20/11, ~55 le 17/11).
+- Documents Claude : les documents créés avant le 2026-11-26 sont restés sur l'ancien compte Claude (inaccessibles depuis le compte actuel) ; leur contenu se retrouve dans l'historique de session. Déroulé de démo recréé : https://claude.ai/artifact/2jTNMqMf4sdAj2ReXtqpJ6.
+- Code : rien de non commité dans `pia`, `pia-back`, `mon-service-securise`. Dans `~/AIPD` (branche `dev`, 5 commits locaux non poussés), les pointeurs `pia` et `pia-back` ne sont pas mis à jour, volontairement.
+- Incubateur : fiche `SUIVI.md` et synthèse du 2026-11-26 poussées dans le Grist (demande n° 24, 2 demi-journées consommées). La skill `suivi` joint désormais un PDF de la synthèse dans la colonne `Synthese_pdf` de `Pilotage` à chaque envoi.
 
 ## 3. Fonctions de l'assistant
 
@@ -41,22 +41,17 @@
 | Entretien guidé, relecture d'une réponse, glossaire | **À faire** (plan V1) |
 | Suggestions de mesures en 3.1 | À faire (ce sont des entités distinctes) |
 | Parcours guidé (`/#/pia/:id/parcours`) : décrire → vérifier (IA + recherche Légifrance/CNIL) → compléter → pré-remplir le PIA (sections 1-2) | Fait (prototype, 26 informations). Champs en brouillon dans `pia-back/config/assistant/guided.yml` (`validated: false`) |
-| Étape 4 Sécurité : service créé dans MonServiceSécurisé, risques/mesures relus, menaces reportées en 3.2.2/3.3.2/3.4.2 | Fait (prototype). Correspondances en brouillon dans `pia-back/config/assistant/security.yml` (DPO + RSSI). Étape 5 Valider faite : bilan, mesures indispensables MSS en 3.1 (une fiche par catégorie), pré-remplissage rejouable |
+| Étape 4 Sécurité : service créé dans MonServiceSécurisé, risques/mesures relus, menaces reportées en 3.2.2/3.3.2/3.4.2 | Fait (prototype). Correspondances en brouillon dans `pia-back/config/assistant/security.yml` (DPO + RSSI). Étape 5 Valider faite : bilan, pré-remplissage rejouable qui reporte aussi les mesures indispensables MSS en 3.1 (une fiche par catégorie MSS, en attendant la table de correspondance) |
 
 ## 4. Prochaine étape
 
-1. **Séance DPO 2026-11-26** (suivre le déroulé ci-dessus) : démo du parcours guidé sur la PIA n° 10 (étapes 1 à 5) ; faire viser `pia-back/config/assistant/guided.yml` (26 informations), `security.yml` (correspondances PIA → MSS, avec le RSSI) et la répartition des informations entre questions CNIL (reprise complète ou renvoi). Points à lui signaler : intérêt légitime exclu pour une autorité publique ; durées de conservation et cadre réglementaire ; inscription MSS bloquée dans le navigateur (« Vos consentements »).
-1 bis. **Demandes de la séance DPO du 2026-11-26** (à traiter) :
-   - Volume : Albert doit proposer une estimation chiffrée du nombre de personnes (ordre de grandeur d'un lycée), pas seulement une tranche en liste déroulante.
-   - Données : pour chaque catégorie de données, préciser le détail (nom, prénom, classe…).
-   - Mesures MSS → PIA : report automatique en 3.1 au pré-remplissage (déployé le 2026-11-26, non commité) ; surtout, **qualifier les mesures MSS pour qu'elles coïncident avec les mesures proposées par le PIA** (table de correspondance mesure MSS → mesure PIA, à faire viser par le DPO et le RSSI).
-   - Chaque mesure proposée par MSS doit être indiquée **mise en œuvre ou non** par le porteur de projet.
-   - Décisions du 2026-11-26 sur ces deux points : (a) les mesures du PIA sont des **catégories** ; chaque mesure précise de MSS doit être rangée dans une catégorie PIA (aucune mesure « hors catégorie ») ; (b) le porteur indique l'état (mise en œuvre ou non) **dans le parcours du PIA, après l'import**, et non dans MSS.
-   - Premier jet de la table de correspondance (135 mesures MSS → 29 catégories PIA, 30 rattachements à confirmer) : `pia-back/config/assistant/measures.yml` (brouillon, pas encore utilisé par le code), tableur et PDF dans `env/review/`, page de relecture en ligne pour le DPD avec 7 questions (https://claude.ai/artifact/DFGUf8GnCcTSvazetZoa1r, source `env/review/mesures-mss-pia.html`, à partager en « Contributeur »). Suite : reporter ses réponses, puis brancher l'import sur ce fichier et ajouter la saisie « mise en œuvre ou non » à l'étape 5.
-   - Ouverture de MSS local sans authentification depuis le parcours (codé le 2026-11-26 : `/oidc/connexion-directe`, option `MSS_DIRECT_LOGIN`, déployé le 2026-11-26, non commité ; à essayer dans le navigateur).
-2. Reporter ses décisions dans `guided.yml`, `security.yml` et `dependencies.yml` (`validated: true`).
-3. Créer les dépôts privés `jedeth/pia`, `jedeth/pia-back` (et `mon-service-securise`) pour sauvegarder le code hors du serveur.
-4. Ensuite : mise en production (serveur DRASI, authentification), schéma de décision de la base légale à mettre à jour (D12), table de correspondance des catégories PIA ↔ MSS demandée par le DPO.
+1. **Attendre le retour du DPO** sur la table de correspondance des mesures (135 mesures MSS → 29 catégories PIA, 30 rattachements à confirmer) et sur les 7 questions. Page de relecture en ligne : https://claude.ai/artifact/DFGUf8GnCcTSvazetZoa1r (à lui partager en « Contributeur » ; Claude relit ses saisies depuis la page). Autres supports : PDF et tableur dans `env/review/`, brouillon `pia-back/config/assistant/measures.yml` (pas encore utilisé par le code).
+2. **Brancher la table** une fois visée : une fiche de mesure par catégorie PIA à l'import (au lieu d'une par catégorie MSS), et saisie par le porteur, à l'étape 5 du parcours, de l'état de chaque mesure (mise en œuvre ou non ; états exacts selon sa réponse à la question 6). Décisions du 2026-11-26 : aucune mesure hors catégorie ; l'état se saisit dans le PIA, pas dans MSS.
+3. **Autres demandes de la séance du 2026-11-26** : estimation chiffrée du nombre de personnes concernées par Albert (pas seulement une tranche) ; détail des données pour chaque catégorie de données.
+4. À vérifier dans le navigateur : liens directs vers MSS à l'étape 4 et import automatique des mesures à l'étape 5 (testés seulement en ligne de commande et par les tests).
+5. Toujours en attente du DPO : visa de `guided.yml` (26 informations), `security.yml` (avec le RSSI), `dependencies.yml` ; répartition des informations entre questions CNIL. Reporter ses décisions (`validated: true`).
+6. Créer les dépôts privés `jedeth/pia`, `jedeth/pia-back` (et `mon-service-securise`) pour sauvegarder le code hors du serveur ; pousser `dev` de `~/AIPD`.
+7. Ensuite : mise en production (serveur DRASI, authentification), schéma de décision de la base légale (D12).
 
 ## 5. Commandes utiles
 
@@ -105,3 +100,4 @@ Les détails d'exploitation (sauvegardes, mails, passage en production) sont dan
 - **2026-11-26** : carnet et mémoire mis à jour avant la séance DPO (changement de compte Claude Code).
 - **2026-11-26** : reprise, état constaté : les 6 conteneurs sont Up, 8080/4200/8090 répondent 200, aucune erreur 5xx sur 24 h, 33 appels assistant (dernier le 2026-11-17), rien de non commité dans `pia`, `pia-back`, `mon-service-securise`.
 - **2026-11-26** : déroulé de démo recréé sur le nouveau compte Claude (l'ancien lien était inaccessible) ; PIA n° 11 remise à zéro pour la démo ; tunnel 8080/8090 figé côté Windows (ancien `ssh.exe`), rétabli par un `ssh -N -L` depuis PowerShell.
+- **2026-11-26 (pause)** : séance DPO tenue (test en direct sur la PIA n° 11). Import automatique des mesures MSS au pré-remplissage et connexion directe à MSS codés, déployés et commités. Premier jet de la table de correspondance des mesures remis au DPO (PDF, page de relecture en ligne, 7 questions). Suivi Grist mis à jour ; export PDF de la synthèse ajouté à la skill `suivi`. Reprise : retours du DPO sur la table.
