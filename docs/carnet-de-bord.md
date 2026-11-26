@@ -1,6 +1,6 @@
 # Carnet de bord — PIA académie + assistant IA
 
-> Dernière mise à jour : **2026-11-17** (pause en fin de session).
+> Dernière mise à jour : **2026-11-26** (avant la séance DPO).
 > Tenu à jour par la skill `aipd-reprise` à chaque pause et à chaque reprise.
 > **Aucun secret ici** : ce fichier est versionné (dépôt `jedeth/AIPD`). Les secrets sont dans `env/server/.env` et `env/server/admin.secret` (droits 600).
 
@@ -18,13 +18,14 @@
 | Front de dev (ng serve) | http://localhost:4200 — mode local par défaut, à basculer en mode serveur comme ci-dessus |
 | PIA de démonstration | n° 8 « Cantine - badges élèves (essai prefill) » (contient des incohérences volontaires) |
 
-## 2. État actuel (constaté le 2026-11-17, à la pause)
+## 2. État actuel (constaté le 2026-11-26)
 
-- Conteneurs `pia-front` (8080), `pia-back`, `pia-db`, `pia-dev` (4200), `mss-web` (127.0.0.1:8090) et `mss-db` : tous **Up**. Le front répond 200, `/api/assistant/status` 401 sans jeton (attendu). Aucune erreur 5xx sur 24 h. 33 appels assistant tracés.
+- Conteneurs `pia-front` (8080), `pia-back`, `pia-db`, `pia-dev` (4200), `mss-web` (127.0.0.1:8090) et `mss-db` : tous **Up**. Le front répond 200, `/api/assistant/status` 401 sans jeton (attendu). Aucune erreur 5xx sur 72 h. 33 appels assistant tracés (dernier le 2026-11-17).
 - Branche déployée : **`feature/guided`** sur `pia` (`1e8af230`) et `pia-back` (`617af92`) : parcours guidé complet, étapes 1 à 5. Commits **locaux uniquement** : `origin` = LINCnil, on n'y pousse pas (dépôts privés `jedeth/pia` et `jedeth/pia-back` à créer).
 - MonServiceSécurisé : branche `local/connexion-dev` (`a881e9562`, passerelle `/integration/pia`, secret partagé dans les deux `.env`). `pia-back` est relié au réseau `mss_default`. 1 compte (`admin@pia.local`) et 1 service (créé depuis la PIA n° 10). Ne jamais exposer au-delà de 127.0.0.1.
 - PIA n° 10 « test_parcours_assiste » : parcours de test complet ; brouillons nettoyés (un seul par question) après l'analyse du premier export PDF.
-- LLM : Albert API, `gpt-oss-120b` par défaut ; la déduction du parcours fait deux appels en parallèle (~45 s) et une recherche dans les collections Légifrance et décisions CNIL d'Albert.
+- LLM : Albert API, `gpt-oss-120b` par défaut ; la déduction du parcours fait deux appels en parallèle et une recherche dans les collections Légifrance et décisions CNIL d'Albert. Le 2026-11-20, Albert débitait 13 tokens/s (contre ~55 le 17/11) : délais portés à 240 s (`LLM_TIMEOUT`) et 300 s (nginx, modification non commitée de `env/server/nginx.conf.template`). Une analyse peut prendre 2-3 min : la lancer avant la démo.
+- Démo DPO : déroulé dans Claude Docs (https://claude.ai/artifact/RbnicicTZ94r86N2U5NVgP). PIA n° 10 = parcours complet avec service MSS ; PIA n° 11 « Démo infirmerie » créée, analyse pas encore aboutie.
 - Code : rien de non commité dans `pia`, `pia-back`, `mon-service-securise`. Dans `~/AIPD`, les pointeurs `pia` et `pia-back` ne sont pas mis à jour, volontairement.
 - Incubateur : demande Grist n° 24 (assistant PIA) scorée 65/100, fiche `SUIVI.md` poussée dans le Grist ; le même jour, scoring et suivi des demandes n° 11 (assistant de langues, portefeuille) et n° 25 (Établi, dépôt Établi).
 
@@ -43,7 +44,7 @@
 
 ## 4. Prochaine étape
 
-1. **Séance DPO vendredi 2026-11-20** : démo du parcours guidé sur la PIA n° 10 (étapes 1 à 5) ; faire viser `pia-back/config/assistant/guided.yml` (26 informations), `security.yml` (correspondances PIA → MSS, avec le RSSI) et la répartition des informations entre questions CNIL (reprise complète ou renvoi). Points à lui signaler : intérêt légitime exclu pour une autorité publique ; durées de conservation et cadre réglementaire ; inscription MSS bloquée dans le navigateur (« Vos consentements »).
+1. **Séance DPO 2026-11-26** (suivre le déroulé ci-dessus) : démo du parcours guidé sur la PIA n° 10 (étapes 1 à 5) ; faire viser `pia-back/config/assistant/guided.yml` (26 informations), `security.yml` (correspondances PIA → MSS, avec le RSSI) et la répartition des informations entre questions CNIL (reprise complète ou renvoi). Points à lui signaler : intérêt légitime exclu pour une autorité publique ; durées de conservation et cadre réglementaire ; inscription MSS bloquée dans le navigateur (« Vos consentements »).
 2. Reporter ses décisions dans `guided.yml`, `security.yml` et `dependencies.yml` (`validated: true`).
 3. Créer les dépôts privés `jedeth/pia`, `jedeth/pia-back` (et `mon-service-securise`) pour sauvegarder le code hors du serveur.
 4. Ensuite : mise en production (serveur DRASI, authentification), schéma de décision de la base légale à mettre à jour (D12), table de correspondance des catégories PIA ↔ MSS demandée par le DPO.
@@ -90,3 +91,6 @@ Les détails d'exploitation (sauvegardes, mails, passage en production) sont dan
 - **2026-11-17** : étape 4 Sécurité : passerelle `/integration/pia` dans MSS (commit local `a881e9562`), pia-back relié au réseau `mss_default`, service créé dans MSS depuis la PIA n° 10 (niveau avancé, 8 risques dont 7 élevés, 113 mesures), menaces reportées en section 3. Commits locaux pia-back `4c063bb`, pia `ce5e962f`.
 - **2026-11-17** : étape 5 Valider, parcours linéaire, report rejouable sans doublon (après analyse du premier export PDF) ; demande Grist n° 24 scorée (65/100) et fiche `SUIVI.md` poussée dans le Grist de l'incubateur.
 - **2026-11-17 (pause)** : parcours guidé complet (étapes 1 à 5, MonServiceSécurisé relié), premier export analysé et corrigé ; demandes 24, 11 et 25 scorées et suivies dans le Grist de l'incubateur ; widget de scoring rendu générique. Reprise : séance DPO du 2026-11-20.
+- **2026-11-20** : reprise, état constaté : les 6 conteneurs sont Up, 8080/4200 répondent 200 (MSS 302 vers la connexion), aucune erreur 5xx depuis le 2026-11-17, rien de non commité. Jour de la séance DPO.
+- **2026-11-20** : déroulé de démo DPO rédigé ; analyse coupée par la lenteur d'Albert (90 s), délais portés à 240/300 s, conteneurs `pia-back` et `pia-front` recréés.
+- **2026-11-26** : carnet et mémoire mis à jour avant la séance DPO (changement de compte Claude Code).

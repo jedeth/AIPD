@@ -24,7 +24,7 @@ server {
         rewrite ^/api/(.*)$ /$1 break;
         proxy_pass $back;
         # Les appels à l'assistant IA peuvent prendre du temps
-        proxy_read_timeout 120s;
+        proxy_read_timeout 300s;
     }
 
     # Pièces jointes (URLs ActiveStorage générées par Rails)
