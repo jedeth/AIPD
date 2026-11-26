@@ -11,6 +11,7 @@
 | Serveur de dev | `ia-raidf1.in.ac-paris.fr` (RHEL 9.6, Podman rootless, pas de GPU) |
 | Accès | VS Code Remote-SSH depuis le poste Windows, dossier `~/AIPD` |
 | Tunnels SSH à ouvrir | `-L 8080:127.0.0.1:8080` (application serveur) et `-L 4200:127.0.0.1:4200` (front de dev). VS Code les transfère souvent seul (onglet « Ports ») |
+| Si le transfert VS Code se fige (page qui tourne dans le vide) | Arrêter le transfert de 8080/8090 dans VS Code (ou tuer l'ancien `ssh.exe` : `netstat -ano \| findstr ":8080 :8090"`), puis dans PowerShell : `ssh -N -L 8080:127.0.0.1:8080 -L 8090:127.0.0.1:8090 iarag@ia-raidf1.in.ac-paris.fr` (n'affiche rien, à laisser ouvert). Garder 8080 côté Windows |
 | Application (mode serveur) | http://localhost:8080 — après un déploiement, **Ctrl+Maj+R** (service worker) |
 | Paramètres du front | Menu Paramètres → URL `http://localhost:8080/api`, Client ID / Client Secret : voir `env/server/admin.secret` |
 | Compte admin | email `admin@pia.local`, mot de passe dans `env/server/admin.secret` |
@@ -24,8 +25,8 @@
 - Branche déployée : **`feature/guided`** sur `pia` (`1e8af230`) et `pia-back` (`617af92`) : parcours guidé complet, étapes 1 à 5. Commits **locaux uniquement** : `origin` = LINCnil, on n'y pousse pas (dépôts privés `jedeth/pia` et `jedeth/pia-back` à créer).
 - MonServiceSécurisé : branche `local/connexion-dev` (`a881e9562`, passerelle `/integration/pia`, secret partagé dans les deux `.env`). `pia-back` est relié au réseau `mss_default`. 1 compte (`admin@pia.local`) et 1 service (créé depuis la PIA n° 10). Ne jamais exposer au-delà de 127.0.0.1.
 - PIA n° 10 « test_parcours_assiste » : parcours de test complet ; brouillons nettoyés (un seul par question) après l'analyse du premier export PDF.
-- LLM : Albert API, `gpt-oss-120b` par défaut ; la déduction du parcours fait deux appels en parallèle et une recherche dans les collections Légifrance et décisions CNIL d'Albert. Le 2026-11-20, Albert débitait 13 tokens/s (contre ~55 le 17/11) : délais portés à 240 s (`LLM_TIMEOUT`) et 300 s (nginx, modification non commitée de `env/server/nginx.conf.template`). Une analyse peut prendre 2-3 min : la lancer avant la démo.
-- Démo DPO : déroulé dans Claude Docs (https://claude.ai/artifact/RbnicicTZ94r86N2U5NVgP). PIA n° 10 = parcours complet avec service MSS ; PIA n° 11 « Démo infirmerie » créée, analyse pas encore aboutie.
+- LLM : Albert API, `gpt-oss-120b` par défaut ; la déduction du parcours fait deux appels en parallèle et une recherche dans les collections Légifrance et décisions CNIL d'Albert. Le 2026-11-20, Albert débitait 13 tokens/s (contre ~55 le 17/11) : délais portés à 240 s (`LLM_TIMEOUT`) et 300 s (nginx, `env/server/nginx.conf.template`, commité dans `57600d2`). Une analyse peut prendre 2-3 min : la lancer avant la démo.
+- Démo DPO : déroulé dans Claude Docs (https://claude.ai/artifact/2jTNMqMf4sdAj2ReXtqpJ6). PIA n° 10 = parcours complet avec service MSS ; PIA n° 11 « Démo infirmerie » : parcours vierge, à lancer en direct (essai du 2026-11-26 : 26 propositions en 54 s, Albert à 34 tokens/s ; profil d'essai supprimé ensuite).
 - Code : rien de non commité dans `pia`, `pia-back`, `mon-service-securise`. Dans `~/AIPD`, les pointeurs `pia` et `pia-back` ne sont pas mis à jour, volontairement.
 - Incubateur : demande Grist n° 24 (assistant PIA) scorée 65/100, fiche `SUIVI.md` poussée dans le Grist ; le même jour, scoring et suivi des demandes n° 11 (assistant de langues, portefeuille) et n° 25 (Établi, dépôt Établi).
 
@@ -94,3 +95,5 @@ Les détails d'exploitation (sauvegardes, mails, passage en production) sont dan
 - **2026-11-20** : reprise, état constaté : les 6 conteneurs sont Up, 8080/4200 répondent 200 (MSS 302 vers la connexion), aucune erreur 5xx depuis le 2026-11-17, rien de non commité. Jour de la séance DPO.
 - **2026-11-20** : déroulé de démo DPO rédigé ; analyse coupée par la lenteur d'Albert (90 s), délais portés à 240/300 s, conteneurs `pia-back` et `pia-front` recréés.
 - **2026-11-26** : carnet et mémoire mis à jour avant la séance DPO (changement de compte Claude Code).
+- **2026-11-26** : reprise, état constaté : les 6 conteneurs sont Up, 8080/4200/8090 répondent 200, aucune erreur 5xx sur 24 h, 33 appels assistant (dernier le 2026-11-17), rien de non commité dans `pia`, `pia-back`, `mon-service-securise`.
+- **2026-11-26** : déroulé de démo recréé sur le nouveau compte Claude (l'ancien lien était inaccessible) ; PIA n° 11 remise à zéro pour la démo ; tunnel 8080/8090 figé côté Windows (ancien `ssh.exe`), rétabli par un `ssh -N -L` depuis PowerShell.
